@@ -19,14 +19,14 @@ void Note::on_back_clicked()
 {
     qDebug() << "back";
     groupL->setText(getGroup());
-    iN->setText(ui->title->toPlainText());
-   this -> close();
+   this -> hide();
+
 }
 
 
 void Note::on_title_textChanged()
 {
-   setTitle(title);
+    iN->setText(ui->title->toPlainText());
 }
 
 void Note::on_toolButton_pressed()

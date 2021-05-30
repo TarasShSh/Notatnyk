@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Нотатка</string>
   </property>
   <widget class="QTextEdit" name="NoteText">
    <property name="geometry">
@@ -35,7 +35,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="placeholderText">
-    <string>Write something here...</string>
+    <string>Введіть який-небудь текст...</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="title">
@@ -62,7 +62,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="placeholderText">
-    <string>Title</string>
+    <string>Заголовок</string>
    </property>
   </widget>
   <widget class="QPushButton" name="back">
@@ -188,7 +188,7 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="text">
-      <string>ЗроБи</string>
+      <string>ToDo</string>
      </property>
     </widget>
    </widget>

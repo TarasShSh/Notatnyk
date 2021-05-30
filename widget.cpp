@@ -25,7 +25,6 @@ void Widget::on_createNoteButton_clicked()
 }
 void Widget::createIconNote(IconNote *icon)
 {
-
      /*3inARow =(
      if(pn_x == 280)
      {
@@ -36,16 +35,17 @@ void Widget::createIconNote(IconNote *icon)
      {
          pn_x += 140;
      }
-     p->setGeometry(pn_x, pn_y, 140, 40);
-     */
-
+     icon->iN->setGeometry(pn_x, pn_y, 140, 40);
+     icon->iN->resize(pn_x, pn_y);
+*/
      icon->dateL->setText(icon->getDate());
      icon->groupL->setText(icon->group);
-
      lay->addWidget(icon->dateL);         // Додаємо дату,
-     lay->addWidget(icon->groupL);         // групу та
-     lay->addWidget(icon->iN); // іконку до області прокручування
+     lay->addWidget(icon->groupL);        // групу та
+     lay->addWidget(icon->iN);            // іконку до області прокручування
      ui->scrollArea->setWidgetResizable(true);
+
+     icon->iN->setFontPointSize(14);
      icon->dateL->show();
      icon->groupL->show();
      icon->iN->show();
@@ -60,7 +60,7 @@ void Widget::createIconNote(IconNote *icon)
     // qDebug()<<lay[1].property("group"); // крашить крашить крашить
 
 }
-void Widget::openNote()
+void Widget::openNote() // відкриття нотаток по іконкам
 {
 
 }
