@@ -63,6 +63,8 @@ void Note::on_todoButton_toggled(bool checked)
     iconGroupName.insert(5,getGroup());
     sc->setIcon(QIcon (iconGroupName));
     qDebug()<<iconGroupName;
+    sc->setToolTip(getGroup());
+    sc->toolTip();
     }
 }
 
