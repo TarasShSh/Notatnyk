@@ -1,14 +1,12 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include <QMessageBox>
+#include <QtCore>
 
-Widget::Widget(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::Widget)
+Widget::Widget(QWidget *parent): QWidget(parent), ui(new Ui::Widget)
 {
     ui->setupUi(this);
     setWindowTitle("Нотатник");
-    ui->scrollContents->setLayout(lay); // Додаємо все що діє у
-
 }
 
 Widget::~Widget()
@@ -16,52 +14,65 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::createShortcutNote(Note *n)
+{
+     ++i;
+     n->date = n->getDate();
+     n->setGroup("");
+     ui->notesList->addItem(n->sc);
+
+     ui->archiveButton->setEnabled(true);
+     ui->archiveButton->setCursor(Qt::PointingHandCursor);
+}
+
 void Widget::on_createNoteButton_clicked()
 {
     Note *n = new Note();
     qDebug() << "Note has been created" << n;
     n->show();
-    createIconNote(n); // функція створення іконки нотатки
+    qDebug()<< n->getDate();
+    createShortcutNote(n); // функція створення ярлика нотатки
 }
-void Widget::createIconNote(IconNote *icon)
+
+void Widget::on_aboutQTButton_clicked()
 {
-     /*3inARow =(
-     if(pn_x == 280)
-     {
-         pn_x = 0;
-         pn_y += 40;
-     }
-     else if(pn_x >= 0)
-     {
-         pn_x += 140;
-     }
-     icon->iN->setGeometry(pn_x, pn_y, 140, 40);
-     icon->iN->resize(pn_x, pn_y);
-*/
-     icon->dateL->setText(icon->getDate());
-     icon->groupL->setText(icon->group);
-     lay->addWidget(icon->dateL);         // Додаємо дату,
-     lay->addWidget(icon->groupL);        // групу та
-     lay->addWidget(icon->iN);            // іконку до області прокручування
-     ui->scrollArea->setWidgetResizable(true);
+    QMessageBox::aboutQt(this,"About Qt");
+}
 
-     icon->iN->setFontPointSize(14);
-     icon->dateL->show();
-     icon->groupL->show();
-     icon->iN->show();
-     /* Реалізація списком, якщо не вийде сортувати слої(спочатку створи QListWidget у widget.ui)
-     QListWidgetItem *boob = new QListWidgetItem;
-     boob->setText(icon->getTitle());
-     ui->listWidget->addItem(boob);
-     ui->listWidget->addItem(icon->getTitle());
-     */
-     // Варіанти отримання інформації
-    // qDebug() << icon->getGroup(); // працює
-    // qDebug()<<lay[1].property("group"); // крашить крашить крашить
+void Widget::on_exitButton_clicked()
+{
+   close();
+}
+
+void Widget::on_toArchiveButton_clicked()
+{
+
+    qDebug() << "beep ArchiveLAY";
+}
+
+void Widget::on_oldestFirstButton_clicked()
+{
+     qDebug() << "beep OLDESTfirst";
+}
+
+void Widget::on_newestFirstButton_clicked()
+{
+    qDebug() << "beep newestFIRST";
 
 }
-void Widget::openNote() // відкриття нотаток по іконкам
+
+void Widget::on_archiveButton_clicked()
+{
+
+    qDebug() << "beep Archive";
+}
+
+void Widget::openNote() // відкриття нотаток по ярликам
 {
 
 }
 
+void Widget::on_notesList_itemClicked(QListWidgetItem *item) // перегляд тексту нотатки
+{
+    ui->preview->setText(item->whatsThis());
+}
