@@ -34,8 +34,8 @@ public:
     void myListUpdate();
 private slots:
 
-    void on_oldestFirstButton_clicked();
-    void on_newestFirstButton_clicked();
+    void on_zaButton_clicked();
+    void on_azButton_clicked();
     void on_notesList_itemClicked(QListWidgetItem *item);
 
     void on_createNoteButton_clicked();

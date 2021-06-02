@@ -10,13 +10,6 @@ Widget::Widget(QWidget *parent): QWidget(parent), ui(new Ui::Widget)
     setWindowTitle("Нотатник");
 
 
-    //QDir myPath();
-    //myPath.setFilter(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
-    //myList = myPath.entryList();
-
-   //Note* item;
-
-
     //QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
     //proxyModel->setSourceModel(new QStringListModel(list));
 
@@ -79,14 +72,14 @@ void Widget::on_exitButton_clicked()
   QApplication::quit();
 }
 
-void Widget::on_oldestFirstButton_clicked()
+void Widget::on_zaButton_clicked()
 {
-    if(ui->newestFirstButton->isChecked())
+    if(ui->azButton->isChecked())
     {
      ui->notesList->model()->sort(0,Qt::AscendingOrder);
      qDebug() << "firstnewest";
     }
-    if(ui->oldestFirstButton->isChecked())
+    if(ui->zaButton->isChecked())
     {
      ui->notesList->model()->sort(0,Qt::DescendingOrder);
      qDebug() << "firstoldest";
@@ -94,14 +87,14 @@ void Widget::on_oldestFirstButton_clicked()
 
 }
 
-void Widget::on_newestFirstButton_clicked()
+void Widget::on_azButton_clicked()
 {
-   if(ui->newestFirstButton->isChecked())
+   if(ui->azButton->isChecked())
    {
     ui->notesList->model()->sort(0,Qt::AscendingOrder);
     qDebug() << "firstnewest";
    }
-   if(ui->oldestFirstButton->isChecked())
+   if(ui->zaButton->isChecked())
    {
     ui->notesList->model()->sort(0,Qt::DescendingOrder);
     qDebug() << "firstoldest";

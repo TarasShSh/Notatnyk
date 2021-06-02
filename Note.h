@@ -6,10 +6,11 @@
 #include "QSortFilterProxyModel"
 #include "QListWidget"
 #include <QWidget>
-/*
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
-*/
+#include <QStandardItemModel>
+
+
 
 using namespace std;
 
@@ -48,6 +49,8 @@ public:
     void scSetDate(QString date){sc->setStatusTip(date);}
     void scSetTitle(QString t){sc->setText(t);}
 private slots:
+    void on_btn_add_clicked();
+private slots:
     void on_backButton_clicked();
     void on_title_textChanged();
     void on_tabWidget_tabCloseRequested(int index);
@@ -61,14 +64,17 @@ private slots:
 
     void on_NoteText_textChanged();
 
-    void on_tabButton_2_clicked();
-    void on_tabWidget_2_tabCloseRequested(int index);
-    void on_picture_toggled(bool checked);
+    //void on_toolButton_2_clicked();
 
-    void on_audio_toggled(bool checked);
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::Note *ui;
+    QStandardItemModel  *m_playListModel;
+       QMediaPlayer        *m_player;
+       QMediaPlaylist      *m_playlist;
 };
 
 #endif // NOTE_H
