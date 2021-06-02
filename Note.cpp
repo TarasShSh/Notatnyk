@@ -43,7 +43,7 @@ QString Note::getDate()
 
 void Note::on_backButton_clicked()
 {
-    qDebug() << "back";
+    //qDebug() << "back";
 
     if(getGroup()=="")
      {
@@ -83,14 +83,11 @@ void Note::on_todoButton_toggled(bool checked)
     // /img/todo.png
     iconGroupName.insert(5,getGroup());
     sc->setIcon(QIcon (iconGroupName));
-    qDebug()<<iconGroupName;
-<<<<<<< HEAD
+    //qDebug()<<iconGroupName;
 
         sc->setToolTip(getGroup());
-=======
     sc->setToolTip(getGroup());
     sc->toolTip();
->>>>>>> 8ba590de3f186b531df7cded81f25f33d15916ba
     }
 }
 
@@ -122,7 +119,7 @@ void Note::on_workButton_toggled(bool checked)
     {
     setGroup("work");
     sc->setStatusTip(getGroup());
-    qDebug()<<sc->statusTip();
+   // qDebug()<<sc->statusTip();
 
         sc->setToolTip(getGroup());
     }

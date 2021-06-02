@@ -9,6 +9,7 @@
 #include "QTextEdit"
 #include <QRegularExpression>
 #include <QDir>
+#include "QList"
 QT_BEGIN_NAMESPACE
 namespace Ui
 {
@@ -21,16 +22,16 @@ class Widget : public QWidget
     Q_OBJECT
 private:
     Ui::Widget *ui;
-    QStringList myList;
+    QStringList myList, myListFiltered;
     int mySelected = -1;
-
+   // QList <>myList;
     bool hasElement(int value);
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
     int i = -1;
     void createShortcutNote(Note *n);
-
+    void myListUpdate();
 private slots:
 
     void on_oldestFirstButton_clicked();

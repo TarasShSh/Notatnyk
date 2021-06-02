@@ -49,7 +49,14 @@ void Widget::createShortcutNote(Note *n)
 
 
 }
-
+void Widget::myListUpdate()
+{
+myList.clear();
+for (int var = 0; var < ui->notesList->count(); ++var)
+{
+    myList.append( ui->notesList->item(var)->text());
+}
+}
 void Widget::on_createNoteButton_clicked()
 {
     Note *n = new Note();
@@ -136,19 +143,10 @@ void Widget::on_pushButton_clicked(Note* item)
 
 void Widget::on_archiveButton_clicked()
 {
-    QMessageBox::StandardButton reply = QMessageBox::question(this,"Архівування нотатки","Ви точно хочете архівувати цю нотатку?",
-                          QMessageBox::Yes | QMessageBox::No);
-
-    if(reply ==  QMessageBox::Yes)
-    {
     QListWidgetItem* it = ui->notesList->takeItem(mySelected);
    ui->archiveList->addItem(it);
-    }
-    else
-    {
-    qDebug()<<"Wasn't archived ";
-    }
 
+   myListUpdate();
     ui->unArchiveButton->setEnabled(true);
     ui->deleteArchiveButton->setEnabled(true);
 }
@@ -162,6 +160,8 @@ void Widget::on_deleteButton_clicked()
     {
     QListWidgetItem* it = ui->notesList->takeItem(mySelected);
      delete it;
+
+    myListUpdate();
     }
     else
     {
@@ -199,6 +199,7 @@ void Widget::on_unArchiveButton_clicked()
     QListWidgetItem* it = ui->archiveList->takeItem(mySelected);
    ui->notesList->addItem(it);
 
+   myListUpdate();
     qDebug() << "beep Disarchive";
 }
 
@@ -212,6 +213,7 @@ void Widget::on_deleteArchiveButton_clicked()
     {
         QListWidgetItem* it = ui->archiveList->takeItem(mySelected);
          delete it;
+         myListUpdate();
     }
     else
     {
@@ -222,15 +224,33 @@ void Widget::on_deleteArchiveButton_clicked()
 void Widget::on_lineEdit_textChanged(const QString &arg1)
 {
     QRegularExpression regExp(arg1, QRegularExpression::CaseInsensitiveOption);
-    ui->notesList->clear();
-    ui->notesList->addItems(myList.filter(regExp));
-    ui->foundedNumber->setText(QString("%1").arg(ui->notesList->count()));
+    //ui->notesList->clear();
+    //ui->notesList->addItems(myList.filter(regExp));
+    myListFiltered = myList.filter(regExp);
+    bool b = false;
+    for (int i = 0; i < ui->notesList->count(); ++i)
+    {
+            for (int j= 0; j< myListFiltered.length(); ++j)
+            {
+                if(myList[i]!=myListFiltered[j])
+                {
+                    ui->notesList->item(i)->setHidden(true);
+                }
+                else
+                {
+                    ui->notesList->item(i)->setHidden(false);
+                     j = myListFiltered.length();
+                }
+             }
+    }
+    ui->foundedNumber->setText(QString("%1").arg(myListFiltered.length()));
 }
 // При редагуванні будь-якого параметру об’єкта ->очищення й повторне додавання оновленого списку
 void Widget::on_notesList_itemChanged(QListWidgetItem *item)
 {
     myList.clear();
-    for (int var = 0; var < ui->notesList->count(); ++var) {
+    for (int var = 0; var < ui->notesList->count(); ++var)
+    {
         myList.append( ui->notesList->item(var)->text());
     }
 }
