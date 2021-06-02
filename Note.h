@@ -27,15 +27,15 @@ public:
     explicit Note(QWidget *parent = nullptr);
     ~Note();
     //QTextEdit title; //можливо створюватимемо дизайн із нуля
-
     QListWidgetItem *sc = new QListWidgetItem();
+    int id;
     QString
             iconGroupName = "/img/.png",
             title ="1",
             text,
             date,
             group;
-
+    QVector<QString> groupNames {"none", "self", "work", "study", "todo"};
     QString getDate();
     QString getTitle(){return title;}
     void setTitle(QString t){title=t;};
@@ -49,17 +49,15 @@ public:
     void scSetDate(QString date){sc->setStatusTip(date);}
     void scSetTitle(QString t){sc->setText(t);}
 private slots:
-    void on_btn_add_clicked();
-private slots:
-    void on_backButton_clicked();
+    void on_backButton_clicked(); // повернення до головного вікна
     void on_title_textChanged();
     void on_tabWidget_tabCloseRequested(int index);
     void on_tabButton_clicked();
-
-    void on_todoButton_toggled(bool checked);
+    void on_noneButton_toggled(bool checked);
     void on_selfButton_toggled(bool checked);
-    void on_studyButton_toggled(bool checked);
     void on_workButton_toggled(bool checked);
+    void on_studyButton_toggled(bool checked);
+    void on_todoButton_toggled(bool checked);
 
 
     void on_NoteText_textChanged();
@@ -72,7 +70,7 @@ private slots:
 
 private:
     Ui::Note *ui;
-    QStandardItemModel  *m_playListModel;
+       QStandardItemModel  *m_playListModel;
        QMediaPlayer        *m_player;
        QMediaPlaylist      *m_playlist;
 };

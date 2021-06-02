@@ -55,8 +55,6 @@ Note::Note(QWidget *parent) :
        connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int index){ ui->label_2->setText(m_playListModel->data(m_playListModel->index(index, 0)).toString());});
 }
 
-
-
 Note::~Note()
 {
     delete ui;
@@ -78,7 +76,7 @@ void Note::on_backButton_clicked()
 
     if(getGroup()=="")
      {
-        setGroup("Без групи");
+        setGroup(groupNames[0]);
      }
     &QMediaPlayer::stop;
    close();
@@ -106,11 +104,56 @@ void Note::on_tabWidget_tabCloseRequested(int index) // Не використо�
     ui->tabWidget->hide();
 }
 
+void Note::on_noneButton_toggled(bool checked)
+{
+    if (checked)
+    {
+    setGroup(groupNames[0]);
+    sc->setStatusTip(getGroup());
+
+        sc->setToolTip(getGroup());
+    }
+}
+void Note::on_selfButton_toggled(bool checked)
+{
+    if (checked)
+    {
+    setGroup(groupNames[1]);
+    sc->setStatusTip(getGroup());
+
+        sc->setToolTip(getGroup());
+    }
+}
+void Note::on_workButton_toggled(bool checked)
+{
+    if (checked)
+    {
+    setGroup(groupNames[2]);
+    sc->setStatusTip(getGroup());
+   // qDebug()<<sc->statusTip();
+
+        sc->setToolTip(getGroup());
+    }
+}
+
+void Note::on_studyButton_toggled(bool checked)
+{
+    if (checked)
+    {
+    setGroup(groupNames[3]);
+    sc->setStatusTip(getGroup());
+
+    //sc->setToolTip(getGroup());
+    }
+}
+
+
+
 void Note::on_todoButton_toggled(bool checked)
 {
     if (checked)
     {
-    setGroup("todo");
+    setGroup(groupNames[4]);
 
     // /img/todo.png
     iconGroupName.insert(5,getGroup());
@@ -122,42 +165,6 @@ void Note::on_todoButton_toggled(bool checked)
     sc->toolTip();
     }
 }
-
-void Note::on_selfButton_toggled(bool checked)
-{
-    if (checked)
-    {
-    setGroup("self");
-    sc->setStatusTip(getGroup());
-
-        sc->setToolTip(getGroup());
-    }
-}
-
-void Note::on_studyButton_toggled(bool checked)
-{
-    if (checked)
-    {
-    setGroup("study");
-    sc->setStatusTip(getGroup());
-
-    //sc->setToolTip(getGroup());
-    }
-}
-
-void Note::on_workButton_toggled(bool checked)
-{
-    if (checked)
-    {
-    setGroup("work");
-    sc->setStatusTip(getGroup());
-   // qDebug()<<sc->statusTip();
-
-        sc->setToolTip(getGroup());
-    }
-}
-
-
 
 
 /*

@@ -118,10 +118,10 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>270</x>
      <y>120</y>
-     <width>91</width>
-     <height>111</height>
+     <width>121</width>
+     <height>171</height>
     </rect>
    </property>
    <property name="autoFillBackground">
@@ -140,57 +140,68 @@ p, li { white-space: pre-wrap; }
     <attribute name="title">
      <string>Група</string>
     </attribute>
-    <widget class="QRadioButton" name="selfButton">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>20</y>
-       <width>121</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Персональна</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="studyButton">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>40</y>
-       <width>121</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Навчальна</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="workButton">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>60</y>
-       <width>121</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Робоча</string>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="todoButton">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>121</width>
-       <height>17</height>
+       <width>111</width>
+       <height>141</height>
       </rect>
      </property>
-     <property name="text">
-      <string>ToDo</string>
-     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="selfButton">
+        <property name="text">
+         <string>Персональна</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../qNotatnyk/img/self.png</normaloff>../../qNotatnyk/img/self.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QRadioButton" name="studyButton">
+        <property name="text">
+         <string>Навчальна</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../qNotatnyk/img/study.png</normaloff>../../qNotatnyk/img/study.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QRadioButton" name="todoButton">
+        <property name="text">
+         <string>ToDo</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../qNotatnyk/img/todo.png</normaloff>../../qNotatnyk/img/todo.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="noneButton">
+        <property name="text">
+         <string>Без групи</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QRadioButton" name="workButton">
+        <property name="text">
+         <string>Робоча</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../qNotatnyk/img/work.png</normaloff>../../qNotatnyk/img/work.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
     <zorder>selfButton</zorder>
     <zorder>studyButton</zorder>
@@ -541,10 +552,6 @@ p, li { white-space: pre-wrap; }
   <zorder>line_2</zorder>
   <zorder>tabWidget</zorder>
   <zorder>btn_pause</zorder>
-  <zorder>label</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>pushButton_2</zorder>
-  <zorder>pushButton_3</zorder>
   <zorder>layoutWidget</zorder>
   <zorder>label_4</zorder>
  </widget>
