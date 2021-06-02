@@ -1,15 +1,14 @@
 #ifndef MYSORTFILTERPROXYMODEL_H
 #define MYSORTFILTERPROXYMODEL_H
-#include <QDate>
 #include <QSortFilterProxyModel>
-
+#include <QDate>
 
 class MySortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
 public:
-    MySortFilterProxyModel(QObject *parent = 0);
+    MySortFilterProxyModel(QObject *parent = nullptr);
 
     QDate filterMinimumDate() const { return minDate; }
     void setFilterMinimumDate(QDate date);
@@ -27,5 +26,4 @@ private:
     QDate minDate;
     QDate maxDate;
 };
-
 #endif // MYSORTFILTERPROXYMODEL_H

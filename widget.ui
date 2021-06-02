@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
+    <width>491</width>
     <height>640</height>
    </rect>
   </property>
@@ -31,7 +31,7 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="header">
      <item>
@@ -89,7 +89,7 @@ p, li { white-space: pre-wrap; }
            </font>
           </property>
           <property name="text">
-           <string>Сортувати за:</string>
+           <string>Сортування:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::AutoText</enum>
@@ -97,7 +97,24 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item>
+         <widget class="QRadioButton" name="oldestFirstButton">
+          <property name="text">
+           <string>Спочатку новіші</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="newestFirstButton">
+          <property name="text">
+           <string>Спочатку старіші</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="azButton">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -108,12 +125,18 @@ p, li { white-space: pre-wrap; }
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Новизною</string>
+           <string>а-я</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="oldestFirstButton">
+         <widget class="QRadioButton" name="zaButton">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -124,7 +147,7 @@ p, li { white-space: pre-wrap; }
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Старизною</string>
+           <string>я-а</string>
           </property>
          </widget>
         </item>
@@ -202,18 +225,181 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Відфільтрувати</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="scrollLayer">
-     <item>
-      <widget class="QTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Нотатки</string>
+      </attribute>
+      <widget class="QListWidget" name="notesList">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>531</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="mouseTracking">
         <bool>true</bool>
        </property>
+<<<<<<< HEAD
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Fixed</enum>
+       </property>
+       <property name="layoutMode">
+        <enum>QListView::SinglePass</enum>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::ListMode</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Архів</string>
+      </attribute>
+      <widget class="QListWidget" name="archiveList">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>351</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="resizeMode">
+        <enum>QListView::Fixed</enum>
+       </property>
+       <property name="layoutMode">
+        <enum>QListView::SinglePass</enum>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::ListMode</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="unArchiveButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>-10</y>
+         <width>121</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Повернути</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="deleteArchiveButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>50</y>
+         <width>121</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string> Видалити </string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="search">
+     <layout class="QHBoxLayout" name="searchLayer">
+      <item>
+       <widget class="QLabel" name="searchText">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Пошук</string>
+        </property>
+=======
        <property name="currentIndex">
         <number>0</number>
        </property>
@@ -509,45 +695,55 @@ p, li { white-space: pre-wrap; }
           <bool>false</bool>
          </property>
         </widget>
+>>>>>>> 8ba590de3f186b531df7cded81f25f33d15916ba
        </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>Архів</string>
-        </attribute>
-        <widget class="QListWidget" name="archiveList">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>461</width>
-           <height>231</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="resizeMode">
-          <enum>QListView::Fixed</enum>
-         </property>
-         <property name="layoutMode">
-          <enum>QListView::SinglePass</enum>
-         </property>
-         <property name="viewMode">
-          <enum>QListView::ListMode</enum>
-         </property>
-         <property name="sortingEnabled">
-          <bool>false</bool>
-         </property>
-        </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
        </widget>
-      </widget>
-     </item>
-    </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="foundedText">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Знайдено:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="foundedNumber">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
+<<<<<<< HEAD
+    <layout class="QHBoxLayout" name="actionsLayer">
+=======
 =======
 >>>>>>> 9774c37 (v0.04)
     <layout class="QHBoxLayout" name="actionsLayer" stretch="0,0">
@@ -563,6 +759,7 @@ p, li { white-space: pre-wrap; }
      <property name="bottomMargin">
       <number>0</number>
      </property>
+>>>>>>> 8ba590de3f186b531df7cded81f25f33d15916ba
      <item>
       <widget class="QPushButton" name="createNoteButton">
        <property name="sizePolicy">
@@ -612,15 +809,9 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="archiveButton">
+      <widget class="QPushButton" name="openButton">
        <property name="enabled">
         <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>1</verstretch>
-        </sizepolicy>
        </property>
        <property name="font">
         <font>
@@ -629,12 +820,70 @@ p, li { white-space: pre-wrap; }
          <bold>true</bold>
         </font>
        </property>
-       <property name="cursor">
-        <cursorShape>ForbiddenCursor</cursorShape>
-       </property>
        <property name="text">
-        <string>Архівувати</string>
+        <string>Відкрити</string>
        </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="actionsOnScLayer">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <layout class="QVBoxLayout" name="actionsOnShortcutsLayer">
+        <item>
+         <widget class="QPushButton" name="deleteButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Видалити🗑   </string>
+          </property>
+          <property name="autoRepeatInterval">
+           <number>100</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="archiveButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>ForbiddenCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Архівувати📦 </string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>

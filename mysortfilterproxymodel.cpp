@@ -1,20 +1,39 @@
 #include "mysortfilterproxymodel.h"
-#include "QSortFilterProxyModel"
 
 MySortFilterProxyModel::MySortFilterProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
-{}
+{
+}
+
 
 bool MySortFilterProxyModel::lessThan(const QModelIndex &left,
                                       const QModelIndex &right) const
 {
     QVariant leftData = sourceModel()->data(left);
     QVariant rightData = sourceModel()->data(right);
-    if (leftData.userType() == QMetaType::QDateTime)
-    {
-            return leftData.toDateTime() < rightData.toDateTime();
-        }
-}
+
+
+    if (leftData.userType() == QMetaType::QDateTime) {
+           return leftData.toDateTime() < rightData.toDateTime();
+       } else {
+           static const QRegularExpression emailPattern("[\\w\\.]*@[\\w\\.]*");
+
+           QString leftString = leftData.toString();
+           if (left.column() == 1) {
+               const QRegularExpressionMatch match = emailPattern.match(leftString);
+               if (match.hasMatch())
+                   leftString = match.captured(0);
+           }
+           QString rightString = rightData.toString();
+           if (right.column() == 1) {
+               const QRegularExpressionMatch match = emailPattern.match(rightString);
+               if (match.hasMatch())
+                   rightString = match.captured(0);
+           }
+
+           return QString::localeAwareCompare(leftString, rightString) < 0;
+       }
+   }
 
 
 bool MySortFilterProxyModel::filterAcceptsRow(int sourceRow,
@@ -41,12 +60,9 @@ void MySortFilterProxyModel::setFilterMinimumDate(QDate date)
 {
     minDate = date;
     invalidateFilter();
-    qDebug()<< minDate << "minD";
 }
-
 void MySortFilterProxyModel::setFilterMaximumDate(QDate date)
 {
     maxDate = date;
     invalidateFilter();
-    qDebug()<< maxDate << "maxD";
 }

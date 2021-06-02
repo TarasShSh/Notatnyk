@@ -6,6 +6,10 @@
 #include "QSortFilterProxyModel"
 #include "QListWidget"
 #include <QWidget>
+/*
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
+*/
 
 using namespace std;
 
@@ -56,6 +60,12 @@ private slots:
 
 
     void on_NoteText_textChanged();
+
+    void on_tabButton_2_clicked();
+    void on_tabWidget_2_tabCloseRequested(int index);
+    void on_picture_toggled(bool checked);
+
+    void on_audio_toggled(bool checked);
 
 private:
     Ui::Note *ui;
