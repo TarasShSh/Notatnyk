@@ -10,22 +10,22 @@ Note::Note(QWidget *parent) :
     ui->setupUi(this);
     ui->tabWidget->setEnabled(false);
     ui->tabWidget->hide();
-    ui->tabWidget_3->hide();
-
+    ui->tabWidget_2->hide();
+    ui->tabw->hide();
     ui->btn_stop->hide();
     ui->toolButton_2->hide();
     ui->btn_pause->hide();
     ui->btn_play->hide();
     ui->btn_next->hide();
     ui->btn_previous->hide();
+    ui->vol->hide();
+    ui->lon->hide();
 
     ui->playlistView->hide();
     ui->label_2->hide();
-     ui->label_4->hide();
+    ui->label_4->hide();
+    ui->label_5->hide();
     ui->line_2->hide();
-
-
-
 
 
        m_playListModel = new QStandardItemModel(this);
@@ -46,6 +46,7 @@ Note::Note(QWidget *parent) :
 
        connect(ui->btn_previous, &QToolButton::clicked, m_playlist, &QMediaPlaylist::previous);
        connect(ui->btn_next, &QToolButton::clicked, m_playlist, &QMediaPlaylist::next);
+
        connect(ui->btn_play, &QToolButton::clicked, m_player, &QMediaPlayer::play);
        connect(ui->btn_pause, &QToolButton::clicked, m_player, &QMediaPlayer::pause);
        connect(ui->btn_stop, &QToolButton::clicked, m_player, &QMediaPlayer::stop);
@@ -53,6 +54,14 @@ Note::Note(QWidget *parent) :
 
        connect(ui->playlistView, &QTableView::doubleClicked, [this](const QModelIndex &index){m_playlist->setCurrentIndex(index.row());});
        connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int index){ ui->label_2->setText(m_playListModel->data(m_playListModel->index(index, 0)).toString());});
+
+       connect(ui->lon, &QSlider::sliderMoved, m_player, &QMediaPlayer::setPosition);
+       connect(m_player, &QMediaPlayer::durationChanged,ui->lon,&QSlider::setMaximum);
+       connect(m_player, &QMediaPlayer::positionChanged,ui->lon,&QSlider::setValue);
+
+
+
+
 }
 
 Note::~Note()
@@ -112,6 +121,7 @@ void Note::on_noneButton_toggled(bool checked)
     sc->setStatusTip(getGroup());
 
         sc->setToolTip(getGroup());
+        ui->label_group->setText(groupNames[0]);
     }
 }
 void Note::on_selfButton_toggled(bool checked)
@@ -122,6 +132,7 @@ void Note::on_selfButton_toggled(bool checked)
     sc->setStatusTip(getGroup());
 
         sc->setToolTip(getGroup());
+           ui->label_group->setText(groupNames[1]);
     }
 }
 void Note::on_workButton_toggled(bool checked)
@@ -133,6 +144,7 @@ void Note::on_workButton_toggled(bool checked)
    // qDebug()<<sc->statusTip();
 
         sc->setToolTip(getGroup());
+           ui->label_group->setText(groupNames[2]);
     }
 }
 
@@ -142,7 +154,7 @@ void Note::on_studyButton_toggled(bool checked)
     {
     setGroup(groupNames[3]);
     sc->setStatusTip(getGroup());
-
+   ui->label_group->setText(groupNames[3]);
     //sc->setToolTip(getGroup());
     }
 }
@@ -163,6 +175,7 @@ void Note::on_todoButton_toggled(bool checked)
         sc->setToolTip(getGroup());
     sc->setToolTip(getGroup());
     sc->toolTip();
+       ui->label_group->setText(groupNames[4]);
     }
 }
 
@@ -177,37 +190,12 @@ void Note::on_toolButton_2_clicked()
 }
 
 */
-void Note::on_pushButton_clicked()
-{
-
-    QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
-   if(QString::compare(filename, QString())!=0)
-   {
-       QImage image;
-       bool valid = image.load(filename);
-
-       if(valid)
-       {
-           image = image.scaledToWidth(ui->lbl_image->width(), Qt::SmoothTransformation);
-           ui->lbl_image->setPixmap(QPixmap::fromImage(image));
-           ui->tabWidget_3->show();
-       }
-       else
-       {
-           //Error
-       }
-
-   }
-}
 
 
 void Note::on_pushButton_2_clicked()
 {
-    // С помощью диалога выбора файлов делаем множественный выбор mp3 файлов
-       QStringList files = QFileDialog::getOpenFileNames(this, tr("Open files"), QString(), tr("Audio Files (*.mp3)"));
 
-       // Далее устанавливаем данные по именам и пути к файлам
-       // в плейлист и таблицу отображающую плейлист
+       QStringList files = QFileDialog::getOpenFileNames(this, tr("Open files"), QString(), tr("Audio Files (*.mp3)"));
        foreach (QString filePath, files)
        {
            QList<QStandardItem *> items;
@@ -226,6 +214,256 @@ void Note::on_pushButton_2_clicked()
 
     ui->playlistView->show();
     ui->label_2->show();
+      ui->label_4->show();
     ui->line_2->show();
+    ui->vol->show();
+     ui->lon->show();
 }
+
+
+void Note::on_vol_sliderMoved(int position)
+{
+    m_player->setVolume(position);
+}
+
+//----------------------------------------------ЗОБРАЖЕННЯ------------------------------------------------------------------------------------------
+void Note::on_pushButton_clicked()
+{
+    ui->tabw->setEnabled(true);
+    ui->tabw->show();
+}
+
+void Note::on_z1_toggled(bool checked)
+{
+     if (checked)
+     {
+         QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+        if(QString::compare(filename, QString())!=0)
+        {
+            QImage image;
+            bool valid = image.load(filename);
+
+            if(valid)
+            {
+                image = image.scaledToWidth(ui->l1->width(), Qt::SmoothTransformation);
+                ui->l1->setPixmap(QPixmap::fromImage(image));
+                //ui->tabWidget_2->show();
+                ui->tabWidget_2->show();
+               // ui->z1->setEnabled(false);
+            }
+            else
+            {
+                //Error
+            }
+
+        }
+     }
+}
+
+
+void Note::on_z2_toggled(bool checked)
+{
+    if (checked)
+    {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+       if(QString::compare(filename, QString())!=0)
+       {
+           QImage image;
+           bool valid = image.load(filename);
+
+           if(valid)
+           {
+               image = image.scaledToWidth(ui->l2->width(), Qt::SmoothTransformation);
+               ui->l2->setPixmap(QPixmap::fromImage(image));
+               //ui->tabWidget_2->show();
+               ui->tabWidget_2->show();
+
+           }
+           else
+           {
+               //Error
+           }
+
+       }
+    }
+}
+
+
+
+
+
+void Note::on_z3_toggled(bool checked)
+{
+    if (checked)
+    {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+       if(QString::compare(filename, QString())!=0)
+       {
+           QImage image;
+           bool valid = image.load(filename);
+
+           if(valid)
+           {
+               image = image.scaledToWidth(ui->l3->width(), Qt::SmoothTransformation);
+               ui->l3->setPixmap(QPixmap::fromImage(image));
+               //ui->tabWidget_2->show();
+               ui->tabWidget_2->show();
+
+           }
+           else
+           {
+               //Error
+           }
+
+       }
+    }
+}
+
+
+void Note::on_z4_toggled(bool checked)
+{
+    if (checked)
+    {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+       if(QString::compare(filename, QString())!=0)
+       {
+           QImage image;
+           bool valid = image.load(filename);
+
+           if(valid)
+           {
+               image = image.scaledToWidth(ui->l4->width(), Qt::SmoothTransformation);
+               ui->l4->setPixmap(QPixmap::fromImage(image));
+               //ui->tabWidget_2->show();
+               ui->tabWidget_2->show();
+
+           }
+           else
+           {
+               //Error
+           }
+
+       }
+    }
+}
+
+
+void Note::on_z5_toggled(bool checked)
+{
+    if (checked)
+    {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+       if(QString::compare(filename, QString())!=0)
+       {
+           QImage image;
+           bool valid = image.load(filename);
+
+           if(valid)
+           {
+               image = image.scaledToWidth(ui->l5->width(), Qt::SmoothTransformation);
+               ui->l5->setPixmap(QPixmap::fromImage(image));
+               //ui->tabWidget_2->show();
+               ui->tabWidget_2->show();
+
+           }
+           else
+           {
+               //Error
+           }
+
+       }
+    }
+}
+
+
+void Note::on_z6_toggled(bool checked)
+{
+    if (checked)
+    {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+       if(QString::compare(filename, QString())!=0)
+       {
+           QImage image;
+           bool valid = image.load(filename);
+
+           if(valid)
+           {
+               image = image.scaledToWidth(ui->l6->width(), Qt::SmoothTransformation);
+               ui->l6->setPixmap(QPixmap::fromImage(image));
+               //ui->tabWidget_2->show();
+               ui->tabWidget_2->show();
+
+           }
+           else
+           {
+               //Error
+           }
+
+       }
+    }
+}
+
+
+void Note::on_z7_toggled(bool checked)
+{
+    if (checked)
+    {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+       if(QString::compare(filename, QString())!=0)
+       {
+           QImage image;
+           bool valid = image.load(filename);
+
+           if(valid)
+           {
+               image = image.scaledToWidth(ui->l7->width(), Qt::SmoothTransformation);
+               ui->l7->setPixmap(QPixmap::fromImage(image));
+               //ui->tabWidget_2->show();
+               ui->tabWidget_2->show();
+
+           }
+           else
+           {
+               //Error
+           }
+
+       }
+    }
+}
+
+
+void Note::on_z8_toggled(bool checked)
+{
+    if (checked)
+    {
+        QString filename = QFileDialog::getOpenFileName(this, tr("Choose"),"",tr("Images(*.png *.jpg *.jpeg *.bmp *.gif)"));
+       if(QString::compare(filename, QString())!=0)
+       {
+           QImage image;
+           bool valid = image.load(filename);
+
+           if(valid)
+           {
+               image = image.scaledToWidth(ui->l8->width(), Qt::SmoothTransformation);
+               ui->l8->setPixmap(QPixmap::fromImage(image));
+               //ui->tabWidget_2->show();
+               ui->tabWidget_2->show();
+
+           }
+           else
+           {
+               //Error
+           }
+
+       }
+    }
+}
+
+
+void Note::on_tabw_tabCloseRequested(int index)
+{
+    ui->tabw->setEnabled(false);
+    ui->tabw->hide();
+}
+
 

@@ -322,7 +322,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>481</width>
+         <width>491</width>
          <height>151</height>
         </rect>
        </property>
@@ -364,7 +364,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>351</width>
+         <width>321</width>
          <height>151</height>
         </rect>
        </property>
@@ -393,10 +393,10 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="geometry">
         <rect>
-         <x>360</x>
-         <y>20</y>
-         <width>121</width>
-         <height>51</height>
+         <x>330</x>
+         <y>30</y>
+         <width>151</width>
+         <height>91</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -413,7 +413,7 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="text">
-        <string>Повернути</string>
+        <string>Розархівувати</string>
        </property>
       </widget>
      </widget>

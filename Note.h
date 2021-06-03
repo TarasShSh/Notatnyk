@@ -9,7 +9,9 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include <QStandardItemModel>
-
+#include <QFileDialog>
+#include <QSlider>
+#include <QProgressBar>
 
 
 using namespace std;
@@ -68,11 +70,33 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_z1_toggled(bool checked);
+
+    void on_z2_toggled(bool checked);
+
+
+
+    void on_z3_toggled(bool checked);
+
+    void on_z4_toggled(bool checked);
+
+    void on_z5_toggled(bool checked);
+
+    void on_z6_toggled(bool checked);
+
+    void on_z7_toggled(bool checked);
+
+    void on_z8_toggled(bool checked);
+
+    void on_tabw_tabCloseRequested(int index);
+
+    void on_vol_sliderMoved(int position);
+
 private:
     Ui::Note *ui;
        QStandardItemModel  *m_playListModel;
-       QMediaPlayer        *m_player;
-       QMediaPlaylist      *m_playlist;
+       QMediaPlayer *m_player;
+       QMediaPlaylist *m_playlist;
 };
 
 #endif // NOTE_H

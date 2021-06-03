@@ -59,6 +59,7 @@ private slots:
 // Додаткові кнопки
     void on_aboutQTButton_clicked();
     void on_exitButton_clicked();
+
 public slots:
 
 };

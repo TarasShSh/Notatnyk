@@ -206,6 +206,7 @@ void Widget::on_lineEdit_textChanged(const QString &arg1)
     }
     ui->foundedNumber->setText(QString("%1").arg(myListFiltered.length()));
 }
+
 // При редагуванні будь-якого параметру об’єкта ->очищення й повторне додавання оновленого списку
 void Widget::on_notesList_itemChanged(QListWidgetItem *item)
 {
@@ -215,4 +216,7 @@ void Widget::on_notesList_itemChanged(QListWidgetItem *item)
         myList.append( ui->notesList->item(var)->text());
     }
 }
+
+
+
 
