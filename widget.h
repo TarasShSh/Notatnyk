@@ -24,6 +24,7 @@ private:
     Ui::Widget *ui;
     QStringList myList, myListFiltered;
     int mySelected = -1;
+    QTreeWidgetItem *myTreeSelected = new QTreeWidgetItem;
     int noteNumber = -1;
     Note *notes[500];
    // QList <>myList;
@@ -59,6 +60,16 @@ private slots:
 // Додаткові кнопки
     void on_aboutQTButton_clicked();
     void on_exitButton_clicked();
+
+    void on_treeWidget_clicked(const QModelIndex &index);
+
+    void on_notesTree_itemClicked(QTreeWidgetItem *item, int column);
+
+    void on_notesTree_itemDoubleClicked(QTreeWidgetItem *item, int column);
+
+    void on_notesTree_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+
+    void on_notesTree_clicked(const QModelIndex &index);
 
 public slots:
 

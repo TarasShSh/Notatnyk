@@ -37,6 +37,13 @@ void Widget::createShortcutNote(Note *n)
     n->sc->setData(1, noteNumber);
     ui->notesList->addItem(n->sc);
 
+
+
+     n->shcSetDate( n->getDate());
+     n->shcSetGroup(n->groupNames[0]);
+     n->shc->setData(0, 1, noteNumber);
+     ui->notesTree->addTopLevelItem(n->shc);
+
      ui->archiveButton->setEnabled(true);
      ui->archiveButton->setCursor(Qt::PointingHandCursor);
 }
@@ -45,9 +52,8 @@ void Widget::on_createNoteButton_clicked()
     Note *n = new Note();
     ++noteNumber;
     notes[noteNumber] = n;
-    qDebug() << "Note has been created" << n;
+    qDebug() << "Note has been created" << n <<"Time:"<< n->getDate();
     n->show();
-    qDebug()<< n->getDate();
     createShortcutNote(n); // функція створення ярлика нотатки
 
     ui->actionsOnScLayer->setEnabled(true);
@@ -57,6 +63,10 @@ void Widget::on_createNoteButton_clicked()
 void Widget::on_notesList_itemDoubleClicked(QListWidgetItem *item) // відкриття нотаток по ярликам
 {
     notes[item->data(1).toInt()]->show();
+}
+void Widget::on_notesTree_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    notes[item->data(0,1).toInt()]->show();
 }
 
 void Widget::myListUpdate()
@@ -87,12 +97,19 @@ void Widget::on_zaButton_clicked()
 void Widget::on_azButton_clicked()
 {
     ui->notesList->model()->sort(0,Qt::AscendingOrder);
+
+    ui->notesList->sortItems(Qt::AscendingOrder);
     qDebug() << "a-z";
 }
 
 void Widget::on_notesList_itemClicked(QListWidgetItem *item) // перегляд тексту нотатки
 {
     ui->preview->setText(item->whatsThis());
+
+}
+void Widget::on_notesTree_itemClicked(QTreeWidgetItem *item, int column)
+{
+    ui->preview->setText(item->whatsThis(0));
 }
 
 void Widget::on_filteredButton_clicked(Note* item)
@@ -119,6 +136,9 @@ void Widget::on_archiveButton_clicked()
 {
     QListWidgetItem* it = ui->notesList->takeItem(mySelected);
    ui->archiveList->addItem(it);
+
+   ui->archiveNotesTree->addTopLevelItem(myTreeSelected);
+    //ui->archiveNotesTree->insertTopLevelItem(mySelected, itTree);
 
    myListUpdate();
     ui->unArchiveButton->setEnabled(true);
@@ -219,4 +239,23 @@ void Widget::on_notesList_itemChanged(QListWidgetItem *item)
 
 
 
+void Widget::on_treeWidget_clicked(const QModelIndex &index)
+{
+    qDebug()<< "fuuuuuf";
+}
+
+
+
+void Widget::on_notesTree_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+    myTreeSelected = current;
+    qDebug()<<myTreeSelected;
+}
+
+
+void Widget::on_notesTree_clicked(const QModelIndex &index)
+{
+
+    qDebug()<<"sdsdsd"<<index;
+}
 

@@ -4,7 +4,8 @@
 #include <iostream>
 #include <QDateTime>
 #include "QSortFilterProxyModel"
-#include "QListWidget"
+#include "QListWidget" //del
+#include "QTreeWidget"
 #include <QWidget>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
@@ -30,6 +31,7 @@ public:
     ~Note();
     //QTextEdit title; //можливо створюватимемо дизайн із нуля
     QListWidgetItem *sc = new QListWidgetItem();
+    QTreeWidgetItem *shc = new QTreeWidgetItem();
     int id;
     QString
             iconGroupName = "/img/.png",
@@ -50,6 +52,11 @@ public:
 
     void scSetDate(QString date){sc->setStatusTip(date);}
     void scSetTitle(QString t){sc->setText(t);}
+
+
+    void shcSetTitle(QString t){shc->setText(0, t);}
+    void shcSetDate(QString date){shc->setText(1,date);}
+    void shcSetGroup(QString g){shc->setText(0, g);}
 private slots:
     void on_backButton_clicked(); // повернення до головного вікна
     void on_title_textChanged();
@@ -70,25 +77,25 @@ private slots:
 
     void on_pushButton_2_clicked();
 
-    void on_z1_toggled(bool checked);
+    void on_imgImport1_toggled(bool checked);
 
-    void on_z2_toggled(bool checked);
+    void on_imgImport2_toggled(bool checked);
 
 
 
-    void on_z3_toggled(bool checked);
+    void on_imgImport3_toggled(bool checked);
 
-    void on_z4_toggled(bool checked);
+    void on_imgImport4_toggled(bool checked);
 
-    void on_z5_toggled(bool checked);
+    void on_imgImport5_toggled(bool checked);
 
-    void on_z6_toggled(bool checked);
+    void on_imgImport6_toggled(bool checked);
 
-    void on_z7_toggled(bool checked);
+    void on_imgImport7_toggled(bool checked);
 
-    void on_z8_toggled(bool checked);
+    void on_imgImport8_toggled(bool checked);
 
-    void on_tabw_tabCloseRequested(int index);
+    void on_imgImportTabWidget_tabCloseRequested(int index);
 
     void on_vol_sliderMoved(int position);
 

@@ -10,10 +10,10 @@ Note::Note(QWidget *parent) :
     ui->setupUi(this);
     ui->tabWidget->setEnabled(false);
     ui->tabWidget->hide();
-    ui->tabWidget_2->hide();
-    ui->tabw->hide();
+    ui->imgImportTabWidget->hide();
+    ui->imgTabWidget->hide();
     ui->btn_stop->hide();
-    ui->toolButton_2->hide();
+    ui->deleteMusicButton->hide();
     ui->btn_pause->hide();
     ui->btn_play->hide();
     ui->btn_next->hide();
@@ -22,9 +22,9 @@ Note::Note(QWidget *parent) :
     ui->lon->hide();
 
     ui->playlistView->hide();
-    ui->label_2->hide();
-    ui->label_4->hide();
-    ui->label_5->hide();
+    ui->playingName->hide();
+    ui->playingText->hide();
+    ui->volumeText->hide();
     ui->line_2->hide();
 
 
@@ -53,14 +53,11 @@ Note::Note(QWidget *parent) :
        connect(ui->backButton, &QToolButton::clicked, m_player, &QMediaPlayer::stop);//щоб виключалась, коли ми закриваємо нотатку
 
        connect(ui->playlistView, &QTableView::doubleClicked, [this](const QModelIndex &index){m_playlist->setCurrentIndex(index.row());});
-       connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int index){ ui->label_2->setText(m_playListModel->data(m_playListModel->index(index, 0)).toString());});
+       connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int index){ ui->playingName->setText(m_playListModel->data(m_playListModel->index(index, 0)).toString());});
 
        connect(ui->lon, &QSlider::sliderMoved, m_player, &QMediaPlayer::setPosition);
        connect(m_player, &QMediaPlayer::durationChanged,ui->lon,&QSlider::setMaximum);
        connect(m_player, &QMediaPlayer::positionChanged,ui->lon,&QSlider::setValue);
-
-
-
 
 }
 
@@ -95,10 +92,13 @@ void Note::on_title_textChanged() // збереження заголовку
 {
     setTitle(ui->title->toPlainText());
     sc->setText(getTitle());
+
+    shc->setText(0, getTitle());
 }
 void Note::on_NoteText_textChanged()// збереження тексту
 {
    sc->setWhatsThis(ui->NoteText->toPlainText());
+   shc->setWhatsThis(0, ui->NoteText->toPlainText());
 }
 
 void Note::on_tabButton_clicked()
@@ -109,7 +109,7 @@ void Note::on_tabButton_clicked()
 
 void Note::on_tabWidget_tabCloseRequested(int index) // Не використовуватимемо більше однієї вкладки, тому index не використано
 {
-    ui->tabWidget->setEnabled(false);
+   // ui->tabWidget->setEnabled(false);
     ui->tabWidget->hide();
 }
 
@@ -118,10 +118,10 @@ void Note::on_noneButton_toggled(bool checked)
     if (checked)
     {
     setGroup(groupNames[0]);
-    sc->setStatusTip(getGroup());
+    shc->setText(2, getGroup());
 
-        sc->setToolTip(getGroup());
-        ui->label_group->setText(groupNames[0]);
+    ui->tabWidget->hide();
+        ui->groupName->setText(getGroup());
     }
 }
 void Note::on_selfButton_toggled(bool checked)
@@ -130,9 +130,10 @@ void Note::on_selfButton_toggled(bool checked)
     {
     setGroup(groupNames[1]);
     sc->setStatusTip(getGroup());
+    shc->setText(2, getGroup());
 
-        sc->setToolTip(getGroup());
-           ui->label_group->setText(groupNames[1]);
+    ui->tabWidget->hide();
+        ui->groupName->setText(getGroup());
     }
 }
 void Note::on_workButton_toggled(bool checked)
@@ -141,10 +142,10 @@ void Note::on_workButton_toggled(bool checked)
     {
     setGroup(groupNames[2]);
     sc->setStatusTip(getGroup());
-   // qDebug()<<sc->statusTip();
+    shc->setText(2, getGroup());
 
-        sc->setToolTip(getGroup());
-           ui->label_group->setText(groupNames[2]);
+    ui->tabWidget->hide();
+        ui->groupName->setText(getGroup());
     }
 }
 
@@ -154,8 +155,9 @@ void Note::on_studyButton_toggled(bool checked)
     {
     setGroup(groupNames[3]);
     sc->setStatusTip(getGroup());
-   ui->label_group->setText(groupNames[3]);
-    //sc->setToolTip(getGroup());
+    shc->setText(2, getGroup());
+    ui->tabWidget->hide();
+        ui->groupName->setText(getGroup());
     }
 }
 
@@ -166,16 +168,11 @@ void Note::on_todoButton_toggled(bool checked)
     if (checked)
     {
     setGroup(groupNames[4]);
+    sc->setStatusTip(getGroup());
+    shc->setText(2, getGroup());
 
-    // /img/todo.png
-    iconGroupName.insert(5,getGroup());
-    sc->setIcon(QIcon (iconGroupName));
-    //qDebug()<<iconGroupName;
-
-        sc->setToolTip(getGroup());
-    sc->setToolTip(getGroup());
-    sc->toolTip();
-       ui->label_group->setText(groupNames[4]);
+    ui->tabWidget->hide();
+        ui->groupName->setText(getGroup());
     }
 }
 
@@ -204,20 +201,19 @@ void Note::on_pushButton_2_clicked()
            m_playListModel->appendRow(items);
            m_playlist->addMedia(QUrl(filePath));
        }
-     ui->label_4->show();
     ui->btn_stop->show();
-    ui->toolButton_2->show();
+    ui->deleteMusicButton->show();
     ui->btn_pause->show();
     ui->btn_play->show();
     ui->btn_next->show();
     ui->btn_previous->show();
 
     ui->playlistView->show();
-    ui->label_2->show();
-      ui->label_4->show();
+    ui->playingText->show();
+    ui->playingName->show();
     ui->line_2->show();
     ui->vol->show();
-     ui->lon->show();
+    ui->lon->show();
 }
 
 
@@ -229,11 +225,11 @@ void Note::on_vol_sliderMoved(int position)
 //----------------------------------------------ЗОБРАЖЕННЯ------------------------------------------------------------------------------------------
 void Note::on_pushButton_clicked()
 {
-    ui->tabw->setEnabled(true);
-    ui->tabw->show();
+    ui->imgImportTabWidget->setEnabled(true);
+    ui->imgImportTabWidget->show();
 }
 
-void Note::on_z1_toggled(bool checked)
+void Note::on_imgImport1_toggled(bool checked)
 {
      if (checked)
      {
@@ -245,11 +241,11 @@ void Note::on_z1_toggled(bool checked)
 
             if(valid)
             {
-                image = image.scaledToWidth(ui->l1->width(), Qt::SmoothTransformation);
-                ui->l1->setPixmap(QPixmap::fromImage(image));
-                //ui->tabWidget_2->show();
-                ui->tabWidget_2->show();
-               // ui->z1->setEnabled(false);
+                image = image.scaledToWidth(ui->imgL1->width(), Qt::SmoothTransformation);
+                ui->imgL1->setPixmap(QPixmap::fromImage(image));
+                //ui->imgTabWidget->show();
+                ui->imgTabWidget->show();
+               // ui->imgImport1->setEnabled(false);
             }
             else
             {
@@ -261,7 +257,7 @@ void Note::on_z1_toggled(bool checked)
 }
 
 
-void Note::on_z2_toggled(bool checked)
+void Note::on_imgImport2_toggled(bool checked)
 {
     if (checked)
     {
@@ -273,10 +269,10 @@ void Note::on_z2_toggled(bool checked)
 
            if(valid)
            {
-               image = image.scaledToWidth(ui->l2->width(), Qt::SmoothTransformation);
-               ui->l2->setPixmap(QPixmap::fromImage(image));
-               //ui->tabWidget_2->show();
-               ui->tabWidget_2->show();
+               image = image.scaledToWidth(ui->imgL2->width(), Qt::SmoothTransformation);
+               ui->imgL2->setPixmap(QPixmap::fromImage(image));
+               //ui->imgTabWidget->show();
+               ui->imgTabWidget->show();
 
            }
            else
@@ -292,7 +288,7 @@ void Note::on_z2_toggled(bool checked)
 
 
 
-void Note::on_z3_toggled(bool checked)
+void Note::on_imgImport3_toggled(bool checked)
 {
     if (checked)
     {
@@ -304,10 +300,10 @@ void Note::on_z3_toggled(bool checked)
 
            if(valid)
            {
-               image = image.scaledToWidth(ui->l3->width(), Qt::SmoothTransformation);
-               ui->l3->setPixmap(QPixmap::fromImage(image));
-               //ui->tabWidget_2->show();
-               ui->tabWidget_2->show();
+               image = image.scaledToWidth(ui->imgL3->width(), Qt::SmoothTransformation);
+               ui->imgL3->setPixmap(QPixmap::fromImage(image));
+               //ui->imgTabWidget->show();
+               ui->imgTabWidget->show();
 
            }
            else
@@ -320,7 +316,7 @@ void Note::on_z3_toggled(bool checked)
 }
 
 
-void Note::on_z4_toggled(bool checked)
+void Note::on_imgImport4_toggled(bool checked)
 {
     if (checked)
     {
@@ -332,10 +328,10 @@ void Note::on_z4_toggled(bool checked)
 
            if(valid)
            {
-               image = image.scaledToWidth(ui->l4->width(), Qt::SmoothTransformation);
-               ui->l4->setPixmap(QPixmap::fromImage(image));
-               //ui->tabWidget_2->show();
-               ui->tabWidget_2->show();
+               image = image.scaledToWidth(ui->imgL4->width(), Qt::SmoothTransformation);
+               ui->imgL4->setPixmap(QPixmap::fromImage(image));
+               //ui->imgTabWidget->show();
+               ui->imgTabWidget->show();
 
            }
            else
@@ -348,7 +344,7 @@ void Note::on_z4_toggled(bool checked)
 }
 
 
-void Note::on_z5_toggled(bool checked)
+void Note::on_imgImport5_toggled(bool checked)
 {
     if (checked)
     {
@@ -360,10 +356,10 @@ void Note::on_z5_toggled(bool checked)
 
            if(valid)
            {
-               image = image.scaledToWidth(ui->l5->width(), Qt::SmoothTransformation);
-               ui->l5->setPixmap(QPixmap::fromImage(image));
-               //ui->tabWidget_2->show();
-               ui->tabWidget_2->show();
+               image = image.scaledToWidth(ui->imgL5->width(), Qt::SmoothTransformation);
+               ui->imgL5->setPixmap(QPixmap::fromImage(image));
+               //ui->imgTabWidget->show();
+               ui->imgTabWidget->show();
 
            }
            else
@@ -376,7 +372,7 @@ void Note::on_z5_toggled(bool checked)
 }
 
 
-void Note::on_z6_toggled(bool checked)
+void Note::on_imgImport6_toggled(bool checked)
 {
     if (checked)
     {
@@ -388,10 +384,10 @@ void Note::on_z6_toggled(bool checked)
 
            if(valid)
            {
-               image = image.scaledToWidth(ui->l6->width(), Qt::SmoothTransformation);
-               ui->l6->setPixmap(QPixmap::fromImage(image));
-               //ui->tabWidget_2->show();
-               ui->tabWidget_2->show();
+               image = image.scaledToWidth(ui->imgL6->width(), Qt::SmoothTransformation);
+               ui->imgL6->setPixmap(QPixmap::fromImage(image));
+               //ui->imgTabWidget->show();
+               ui->imgTabWidget->show();
 
            }
            else
@@ -404,7 +400,7 @@ void Note::on_z6_toggled(bool checked)
 }
 
 
-void Note::on_z7_toggled(bool checked)
+void Note::on_imgImport7_toggled(bool checked)
 {
     if (checked)
     {
@@ -416,10 +412,10 @@ void Note::on_z7_toggled(bool checked)
 
            if(valid)
            {
-               image = image.scaledToWidth(ui->l7->width(), Qt::SmoothTransformation);
-               ui->l7->setPixmap(QPixmap::fromImage(image));
-               //ui->tabWidget_2->show();
-               ui->tabWidget_2->show();
+               image = image.scaledToWidth(ui->imgL7->width(), Qt::SmoothTransformation);
+               ui->imgL7->setPixmap(QPixmap::fromImage(image));
+               //ui->imgTabWidget->show();
+               ui->imgTabWidget->show();
 
            }
            else
@@ -432,7 +428,7 @@ void Note::on_z7_toggled(bool checked)
 }
 
 
-void Note::on_z8_toggled(bool checked)
+void Note::on_imgImport8_toggled(bool checked)
 {
     if (checked)
     {
@@ -444,10 +440,10 @@ void Note::on_z8_toggled(bool checked)
 
            if(valid)
            {
-               image = image.scaledToWidth(ui->l8->width(), Qt::SmoothTransformation);
-               ui->l8->setPixmap(QPixmap::fromImage(image));
-               //ui->tabWidget_2->show();
-               ui->tabWidget_2->show();
+               image = image.scaledToWidth(ui->imgL8->width(), Qt::SmoothTransformation);
+               ui->imgL8->setPixmap(QPixmap::fromImage(image));
+               //ui->imgTabWidget->show();
+               ui->imgTabWidget->show();
 
            }
            else
@@ -460,10 +456,8 @@ void Note::on_z8_toggled(bool checked)
 }
 
 
-void Note::on_tabw_tabCloseRequested(int index)
+void Note::on_imgImportTabWidget_tabCloseRequested(int index)
 {
-    ui->tabw->setEnabled(false);
-    ui->tabw->hide();
+    ui->imgImportTabWidget->setEnabled(false);
+    ui->imgImportTabWidget->hide();
 }
-
-
