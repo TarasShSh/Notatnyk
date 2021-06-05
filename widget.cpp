@@ -47,33 +47,23 @@ void Widget::createShortcutNote(Note *n)
     ui->archiveButton->setEnabled(true);
     ui->archiveButton->setCursor(Qt::PointingHandCursor);
 }
+
 void Widget::on_createNoteButton_clicked()
 {
     Note *n = new Note();
     ++noteNumber;
     notes[noteNumber] = n;
     qDebug() << "Note has been created" << n <<"Time:"<< n->getDate();
+
+    n->resize(470,630);
+    n->setMinimumSize(470,630);
+    n->setMaximumSize(880,630);
     n->show();
+
     createShortcutNote(n); // функція створення ярлика нотатки
 
     ui->actionsOnScLayer->setEnabled(true);
     ui->deleteButton->setEnabled(true);
-    ui->createSubNote->setEnabled(true);
-}
-void Widget::on_createSubNote_clicked()
-{
-    Note *n = new Note();
-    ++noteNumber;
-    notes[noteNumber] = n;
-    qDebug() << "Subnote has been created" << n <<"Time:"<< n->getDate();
-
-    n->shcSetDate( n->getDate());
-    n->shcSetTitle(n->getTitle());
-    n->shcSetGroup(n->groupNames[0]);
-    n->shc->setData(0, 1, noteNumber);
-    n->show();
-    ui->notesTree->currentItem()->addChild(n->shc);
-
 }
 
 void Widget::on_notesList_itemDoubleClicked(QListWidgetItem *item) // відкриття нотаток по ярликам
@@ -109,6 +99,7 @@ void Widget::on_zaButton_clicked()
      ui->notesList->model()->sort(0,Qt::DescendingOrder);
      qDebug() << "z-a";
 }
+
 void Widget::on_azButton_clicked()
 {
     ui->notesList->model()->sort(0,Qt::AscendingOrder);
@@ -145,6 +136,8 @@ void Widget::on_filteredButton_clicked(Note* item)
 }
 
 
+
+
 void Widget::on_archiveButton_clicked()
 {
     QListWidgetItem* it = ui->notesList->takeItem(mySelected);
@@ -164,6 +157,7 @@ void Widget::on_deleteButton_clicked()
     {
         if(ui->tabWidget->currentWidget() == ui->notesTab)
         {
+            delete ui->notesList->takeItem(mySelected);
             delete ui->notesTree->currentItem();
         }
         else if(ui->tabWidget->currentWidget() == ui->archiveTab)
@@ -214,22 +208,18 @@ void Widget::on_unArchiveButton_clicked()
 
    // Отримуємо номер виділеного рядка ui->archiveNotesTree->currentIndex().row()
    // Вирізаємо takeTopLevelItem() та повертаємо addTopLevelItem виділений рядок нотаток
-     ui->notesTree->addTopLevelItem( ui->archiveNotesTree->takeTopLevelItem( ui->archiveNotesTree->currentIndex().row() ) );
+   ui->notesTree->addTopLevelItem( ui->archiveNotesTree->takeTopLevelItem(ui->archiveNotesTree->currentIndex().row()));
 
-
-myListUpdate();
-  // ui->notesTree->insertTopLevelItem(0,ui->archiveNotesTree->currentItem());
-  // ui->notesTree->addTopLevelItem(ui->archiveNotesTree->currentItem());
+   myListUpdate();
     qDebug() << "beep Disarchive";
 }
 
 void Widget::on_searchLine_textChanged(const QString &arg1)
 {
     QRegularExpression regExp(arg1, QRegularExpression::CaseInsensitiveOption);
-    ui->notesList->clear();
-    ui->notesList->addItems(myList.filter(regExp));
+    //ui->notesList->clear();
+    //ui->notesList->addItems(myList.filter(regExp));
     myListFiltered = myList.filter(regExp);
-
     for (int i = 0; i < ui->notesList->count(); ++i)
     {
             for (int j= 0; j< myListFiltered.length(); ++j)
@@ -245,34 +235,31 @@ void Widget::on_searchLine_textChanged(const QString &arg1)
                 }
              }
     }
-    //  TREE
-    QList<QTreeWidgetItem*> filter = ui->notesTree->findItems(arg1,Qt::MatchExactly, 0);
 
-    qDebug()<<ui->notesTree->topLevelItemCount();
-    qDebug()<<ui->notesTree->topLevelItem(0)->childCount();
-    int times = 0;
-    for (int father = 0; father < (ui->notesTree->topLevelItemCount()); ++father)
+    //  TREE
+    qDebug() << ui->notesTree->topLevelItemCount();
+
+    qDebug() << ui->notesTree->currentItem()->childCount();
+    /*for (int i = 0; i < ui->notesTree->topLevelItemCount(); ++i)
     {
-        qDebug() << "Father count = " << father;
-    for (int child = 0; child < (ui->notesTree->topLevelItem(father)->childCount());)
+    for (int i = 0; i < ui->notesTree->itemAt()->childCount(); ++i)
         {
-                qDebug() << "Child count = " << child;
-                if(!ui->notesTree->topLevelItem(father)->child(child)->text(0).contains(regExp))
+            for (int j= 0; j< myListFiltered.length(); ++j)
+            {
+                if(myList[i]!=myListFiltered[j])
                 {
-                    qDebug() << "!contain " << true;
-                    ui->notesTree->topLevelItem(father)->child(child)->setHidden(true);
-                    ++child;
+                    ui->notesTree->item(i)->setHidden(true);
                 }
                 else
                 {
-                    qDebug() << "!contain " << false;
-                     ui->notesTree->topLevelItem(father)->child(child)->setHidden(false);
-                    ++child;
-                     ++times;
+                    ui->notesTree->item(i)->setHidden(false);
+                     j = myListFiltered.length();
                 }
+             }
         }
     }
-    ui->foundedNumber->setText(QString("%1").arg(times));
+    */
+    ui->foundedNumber->setText(QString("%1").arg(myListFiltered.length()));
 }
 
 // При редагуванні будь-якого параметру об’єкта ->очищення й повторне додавання оновленого списку
@@ -285,8 +272,14 @@ void Widget::on_notesList_itemChanged(QListWidgetItem *item)
     }
 }
 
+void Widget::on_notesTree_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+}
+
+
 void Widget::on_notesTree_clicked(const QModelIndex &index)
 {
 
     qDebug()<<"notesTree_clicked index: "<<index;
 }
+

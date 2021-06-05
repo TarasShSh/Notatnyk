@@ -88,6 +88,125 @@ private slots:
 
     void on_vol_sliderMoved(int position);
 
+
+
+    void on_deleteImgButton_clicked();
+
+    void on_deleteImgButton_2_clicked();
+
+    void on_deleteImgButton_3_clicked();
+
+    void on_deleteImgButton_4_clicked();
+
+    void on_deleteImgButton_5_clicked();
+
+    void on_deleteImgButton_6_clicked();
+
+    void on_deleteImgButton_7_clicked();
+
+    void on_deleteImgButton_8_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_fon_widget_tabCloseRequested(int index);
+
+    void on_f1_toggled(bool checked);
+
+    void on_f2_toggled(bool checked);
+
+    void on_f3_toggled(bool checked);
+
+    void on_f4_toggled(bool checked);
+
+    void on_f5_toggled(bool checked);
+
+    void on_f6_toggled(bool checked);
+
+    void on_fimport_toggled(bool checked);
+
+    void on_fbez_toggled(bool checked);
+
+    void on_f7_toggled(bool checked);
+
+    void on_bRed_clicked();
+
+    void on_bBlack_clicked();
+
+    void on_bWhite_clicked();
+
+    void on_bGreen_clicked();
+
+    void on_bGray_clicked();
+
+    void on_bBlue_clicked();
+
+    void on_bYellow_clicked();
+
+    void on_bviol_clicked();
+
+    void on_bBrown_clicked();
+
+    void on_Kp_clicked();
+
+    void on_Kn_clicked();
+
+    void on_Bp_clicked();
+
+    void on_Bn_clicked();
+
+    void on_Cp_clicked();
+
+    void on_Cn_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_sizeWidget_tabCloseRequested(int index);
+
+
+    void on_s10_clicked();
+
+    void on_s12_clicked();
+
+    void on_s14_clicked();
+
+    void on_s16_clicked();
+
+    void on_s20_clicked();
+
+    void on_s22_clicked();
+
+    void on_s24_clicked();
+
+    void on_s28_clicked();
+
+    void on_s32_clicked();
+
+    void on_s36_clicked();
+
+    void on_s40_clicked();
+
+    void on_s48_clicked();
+
+    void on_bviol_2_clicked();
+
+    void on_bRed_2_clicked();
+
+    void on_bYellow_2_clicked();
+
+    void on_bBrown_2_clicked();
+
+    void on_bBlue_2_clicked();
+
+    void on_bBlack_2_clicked();
+
+    void on_bGreen_2_clicked();
+
+    void on_bGray_2_clicked();
+
+    void on_bWhite_2_clicked();
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::Note *ui;
        QStandardItemModel  *m_playListModel;

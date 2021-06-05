@@ -23,9 +23,6 @@ class Widget : public QWidget
 private:
     Ui::Widget *ui;
     QStringList myList, myListFiltered;
-    QTreeWidget treeList, treeListFiltered;
-    QList<QTreeWidgetItem*> notfilter;
-
     int mySelected = -1;
     QTreeWidgetItem *myNoteSelected, *myArchiveNoteSelected;
     int noteNumber = -1;
@@ -69,9 +66,9 @@ private slots:
 
     void on_notesTree_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-    void on_notesTree_clicked(const QModelIndex &index);
-    void on_createSubNote_clicked();
+    void on_notesTree_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
 
+    void on_notesTree_clicked(const QModelIndex &index);
 public slots:
 
 };
