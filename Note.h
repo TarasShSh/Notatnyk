@@ -33,13 +33,12 @@ public:
     QListWidgetItem *sc = new QListWidgetItem();
     QTreeWidgetItem *shc = new QTreeWidgetItem();
     int id;
+    QVector<QString> groupNames {"Ніяка", "Персональна", "Робоча", "Навчальна", "ToDo"};
     QString
-            iconGroupName = "/img/.png",
-            title ="1",
+            title = "Без назви",
             text,
             date,
-            group;
-    QVector<QString> groupNames {"none", "self", "work", "study", "todo"};
+            group =groupNames[0];
     QString getDate();
     QString getTitle(){return title;}
     void setTitle(QString t){title=t;};
@@ -56,7 +55,7 @@ public:
 
     void shcSetTitle(QString t){shc->setText(0, t);}
     void shcSetDate(QString date){shc->setText(1,date);}
-    void shcSetGroup(QString g){shc->setText(0, g);}
+    void shcSetGroup(QString g){shc->setText(2, g);}
 private slots:
     void on_backButton_clicked(); // повернення до головного вікна
     void on_title_textChanged();
@@ -76,25 +75,15 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
-
+// IMAGES IMPORT BUTTONS
     void on_imgImport1_toggled(bool checked);
-
     void on_imgImport2_toggled(bool checked);
-
-
-
     void on_imgImport3_toggled(bool checked);
-
     void on_imgImport4_toggled(bool checked);
-
     void on_imgImport5_toggled(bool checked);
-
     void on_imgImport6_toggled(bool checked);
-
     void on_imgImport7_toggled(bool checked);
-
     void on_imgImport8_toggled(bool checked);
-
     void on_imgImportTabWidget_tabCloseRequested(int index);
 
     void on_vol_sliderMoved(int position);

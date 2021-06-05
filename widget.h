@@ -23,8 +23,11 @@ class Widget : public QWidget
 private:
     Ui::Widget *ui;
     QStringList myList, myListFiltered;
+    QTreeWidget treeList, treeListFiltered;
+    QList<QTreeWidgetItem*> notfilter;
+
     int mySelected = -1;
-    QTreeWidgetItem *myTreeSelected = new QTreeWidgetItem;
+    QTreeWidgetItem *myNoteSelected, *myArchiveNoteSelected;
     int noteNumber = -1;
     Note *notes[500];
    // QList <>myList;
@@ -35,12 +38,13 @@ public:
     int i = -1;
     void createShortcutNote(Note *n);
     void myListUpdate();
+
 private slots:
 // сортування та фільтри списку ярликів
     void on_azButton_clicked(); // від а-я
     void on_zaButton_clicked(); // від я-а
     void on_filteredButton_clicked(Note* item); // застосування фільтру за групами
-    void on_lineEdit_textChanged(const QString &arg1); // пошукач
+    void on_searchLine_textChanged(const QString &arg1); // пошукач
 // Дії з нотатками
     void on_createNoteButton_clicked(); // створення нотатки її ярлика
     void on_archiveButton_clicked();    // архівування нотатки
@@ -61,15 +65,12 @@ private slots:
     void on_aboutQTButton_clicked();
     void on_exitButton_clicked();
 
-    void on_treeWidget_clicked(const QModelIndex &index);
-
     void on_notesTree_itemClicked(QTreeWidgetItem *item, int column);
 
     void on_notesTree_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-    void on_notesTree_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-
     void on_notesTree_clicked(const QModelIndex &index);
+    void on_createSubNote_clicked();
 
 public slots:
 

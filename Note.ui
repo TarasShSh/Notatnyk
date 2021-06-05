@@ -138,22 +138,32 @@ p, li { white-space: pre-wrap; }
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
-     <string>Група</string>
+     <string>Вибір групи</string>
     </attribute>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>1</y>
-       <width>130</width>
-       <height>123</height>
+       <width>111</width>
+       <height>101</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="groupButtons">
       <item>
        <widget class="QRadioButton" name="noneButton">
         <property name="text">
-         <string>Без групи</string>
+         <string>Ніяка</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="selfButton">
+        <property name="text">
+         <string>Персональна</string>
         </property>
        </widget>
       </item>
@@ -171,13 +181,6 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="selfButton">
-        <property name="text">
-         <string>Персональна</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QRadioButton" name="studyButton">
         <property name="text">
          <string>Навчальна</string>
@@ -188,10 +191,6 @@ p, li { white-space: pre-wrap; }
        <widget class="QRadioButton" name="todoButton">
         <property name="text">
          <string>ToDo</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../../qNotatnyk/img/todo.png</normaloff>../../qNotatnyk/img/todo.png</iconset>
         </property>
        </widget>
       </item>
@@ -395,7 +394,7 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>7</number>
    </property>
    <widget class="QWidget" name="imgTab1">
     <attribute name="title">
@@ -630,7 +629,7 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="z8">
+       <widget class="QRadioButton" name="imgImport8">
         <property name="text">
          <string>Зображення 8</string>
         </property>

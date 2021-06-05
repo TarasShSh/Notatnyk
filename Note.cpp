@@ -78,12 +78,6 @@ QString Note::getDate()
 
 void Note::on_backButton_clicked()
 {
-    //qDebug() << "back";
-
-    if(getGroup()=="")
-     {
-        setGroup(groupNames[0]);
-     }
     &QMediaPlayer::stop;
    close();
 }
@@ -121,7 +115,7 @@ void Note::on_noneButton_toggled(bool checked)
     shc->setText(2, getGroup());
 
     ui->tabWidget->hide();
-        ui->groupName->setText(getGroup());
+    ui->groupName->setText(getGroup());
     }
 }
 void Note::on_selfButton_toggled(bool checked)
