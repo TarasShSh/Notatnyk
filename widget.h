@@ -23,7 +23,9 @@ class Widget : public QWidget
 private:
     Ui::Widget *ui;
     QStringList myList, myListFiltered;
-    int mySelected = -1;
+    QTreeWidget treeList, treeListFiltered;
+    QList<QTreeWidgetItem*> notfilter;
+
     QTreeWidgetItem *myNoteSelected, *myArchiveNoteSelected;
     int noteNumber = -1;
     Note *notes[500];
@@ -34,12 +36,8 @@ public:
     ~Widget();
     int i = -1;
     void createShortcutNote(Note *n);
-    void myListUpdate();
-
 private slots:
 // сортування та фільтри списку ярликів
-    void on_azButton_clicked(); // від а-я
-    void on_zaButton_clicked(); // від я-а
     void on_filteredButton_clicked(Note* item); // застосування фільтру за групами
     void on_searchLine_textChanged(const QString &arg1); // пошукач
 // Дії з нотатками
@@ -49,15 +47,7 @@ private slots:
 
     void on_unArchiveButton_clicked();  // повернення нотатки з архіву
 
-    void on_notesList_itemDoubleClicked(QListWidgetItem *item); // відкриття нотатки для редагування
-// Отримання ярлика зі звичайного та архівного списку для дій над ним
-    void on_notesList_itemClicked(QListWidgetItem *item);
-    void on_notesList_currentRowChanged(int currentRow);
 
-    void on_archiveList_itemClicked(QListWidgetItem *item);
-    void on_archiveList_currentRowChanged(int currentRow);
-
-    void on_notesList_itemChanged(QListWidgetItem *item); // оновлення списку при додаванні нотатки
 // Додаткові кнопки
     void on_aboutQTButton_clicked();
     void on_exitButton_clicked();
@@ -66,9 +56,31 @@ private slots:
 
     void on_notesTree_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-    void on_notesTree_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
-
     void on_notesTree_clicked(const QModelIndex &index);
+    void on_createSubNote_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_cViol_clicked();
+
+    void on_cYellow_clicked();
+
+    void on_cBrown_clicked();
+
+    void on_cBlue_clicked();
+
+    void on_cGreen_clicked();
+
+    void on_cRed_clicked();
+
+    void on_cGray_clicked();
+
+    void on_cWhite_clicked();
+
+    void on_colors_tabCloseRequested(int index);
+
 public slots:
 
 };
