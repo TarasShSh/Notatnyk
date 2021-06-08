@@ -13,12 +13,10 @@ CONFIG += c++11
 SOURCES += \
     Note.cpp \
     main.cpp \
-    mysortfilterproxymodel.cpp \
     widget.cpp
 
 HEADERS += \
     Note.h \
-    mysortfilterproxymodel.h \
     widget.h
 
 FORMS += \
