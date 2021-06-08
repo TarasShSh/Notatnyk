@@ -118,6 +118,7 @@ void Widget::on_archiveNotesTree_itemClicked(QTreeWidgetItem *item, int column)
 
 
 //--------------------------------------------------------
+
 void Widget::on_filteredButton_clicked()
 {
     if(       ui->noneCheckBox->isChecked()
@@ -231,8 +232,7 @@ int Widget::search(int column, QString regExp)
     for (int child = 0; child < (ui->notesTree->topLevelItem(father)->childCount());)
         {
                 qDebug() << "Child count = " << child;
-                        if(
-                           ui->notesTree->topLevelItem(father)->child(child)->text(column).contains(regExp))
+                        if(ui->notesTree->topLevelItem(father)->child(child)->text(column).contains(regExp))
                 {
                     qDebug() << "contain ";
                     ui->notesTree->topLevelItem(father)->child(child)->setHidden(false);
@@ -257,6 +257,7 @@ void Widget::filterNShow(int column, QString regExp)
         if( ui->notesTree->topLevelItem(father)->text(column).contains(regExp))
         {
             ui->notesTree->topLevelItem(father)->setHidden(false);
+        }
         for (int child = 0; child < (ui->notesTree->topLevelItem(father)->childCount());++child)
         {
                 qDebug() << "Child count = " << child;
@@ -265,14 +266,12 @@ void Widget::filterNShow(int column, QString regExp)
                     qDebug() << "contain ";
                     ui->notesTree->topLevelItem(father)->child(child)->setHidden(false);
                 }
-        }
     }
 }
 }
 
 void Widget::on_notesTree_clicked(const QModelIndex &index)
 {
-
     qDebug()<<"notesTree_clicked index: "<<index;
 }
 

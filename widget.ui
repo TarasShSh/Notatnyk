@@ -346,7 +346,7 @@ p, li { white-space: pre-wrap; }
         <bool>false</bool>
        </property>
        <attribute name="headerVisible">
-        <bool>false</bool>
+        <bool>true</bool>
        </attribute>
        <attribute name="headerCascadingSectionResizes">
         <bool>true</bool>

@@ -44,7 +44,7 @@ private slots:
     // знаходить та приховує елементи за заданим словом у заданій колонці та повертає кількість знайдених елементів
     int search(int column, QString regExp);
     void filterNShow(int column, QString regExp);
-// Дії з нотатками
+    // Дії з нотатками
     void on_createNoteButton_clicked(); // створення нотатки її ярлика
     void on_archiveButton_clicked();    // архівування нотатки
     void on_deleteButton_clicked();     // видалення нотатки
