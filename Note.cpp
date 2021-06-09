@@ -2,6 +2,8 @@
 #include "ui_Note.h"
 #include <QFileDialog>
 #include <QPixmap>
+#include <QMessageBox>
+#include <QStandardItemModel>
 
 Note::Note(QWidget *parent) :
     QWidget(parent),
@@ -9,81 +11,62 @@ Note::Note(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     ui->tabWidget->setEnabled(false);
-     ui->fon_widget->setEnabled(false);
-
-   /*
-    ui->imgTabWidget->hide();
-    ui->btn_stop->hide();
-    ui->deleteMusicButton->hide();
-    ui->btn_pause->hide();
-    ui->btn_play->hide();
-    ui->btn_next->hide();
-    ui->btn_previous->hide();
-    ui->vol->hide();
-    ui->lon->hide();
-
-    ui->playlistView->hide();
-    ui->playingName->hide();
-    ui->playingText->hide();
-    ui->volumeText->hide();
-    ui->line_2->hide();*/
-
-      ui->fon1->hide();
-       ui->fon2->hide();
-        ui->fon3->hide();
-         ui->fon4->hide();
-          ui->fon5->hide();
-           ui->fon6->hide();
-            ui->fon7->hide();
-            ui->fon_imp->hide();
-
-      ui->imgImportTabWidget->hide();
-      ui->fon_widget->hide();
-       ui->tabWidget->hide();
-       ui->sizeWidget->hide();
+    ui->fon_widget->setEnabled(false);
+    ui->fon1->hide();
+    ui->fon2->hide();
+    ui->fon3->hide();
+    ui->fon4->hide();
+    ui->fon5->hide();
+    ui->fon6->hide();
+    ui->fon7->hide();
+    ui->fon_imp->hide();
+    ui->imgImportTabWidget->hide();
+    ui->fon_widget->hide();
+    ui->tabWidget->hide();
+    ui->sizeWidget->hide();
 
 
+    // AUDIO PLAYER
+    m_playListModel = new QStandardItemModel(this);
+    ui->playlistView->setModel(m_playListModel);
+    m_playListModel->setHorizontalHeaderLabels(QStringList()  << tr("Audio Track") << tr("File Path"));
+    ui->playlistView->hideColumn(1);
+    ui->playlistView->verticalHeader()->setVisible(false);
+    ui->playlistView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->playlistView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->playlistView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->playlistView->horizontalHeader()->setStretchLastSection(true);
 
-       m_playListModel = new QStandardItemModel(this);
-       ui->playlistView->setModel(m_playListModel);
-       m_playListModel->setHorizontalHeaderLabels(QStringList()  << tr("Audio Track") << tr("File Path"));
-       ui->playlistView->hideColumn(1);
-       ui->playlistView->verticalHeader()->setVisible(false);
-       ui->playlistView->setSelectionBehavior(QAbstractItemView::SelectRows);
-       ui->playlistView->setSelectionMode(QAbstractItemView::SingleSelection);
-       ui->playlistView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-       ui->playlistView->horizontalHeader()->setStretchLastSection(true);
+    m_player = new QMediaPlayer(this);
+    m_playlist = new QMediaPlaylist(m_player);
+    m_player->setPlaylist(m_playlist);
+    m_playlist->setPlaybackMode(QMediaPlaylist::Loop);
 
-       m_player = new QMediaPlayer(this);
-       m_playlist = new QMediaPlaylist(m_player);
-       m_player->setPlaylist(m_playlist);
-       m_player->setVolume(70);
-       m_playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    connect(ui->btn_previous, &QToolButton::clicked, m_playlist, &QMediaPlaylist::previous);
+    connect(ui->btn_next, &QToolButton::clicked, m_playlist, &QMediaPlaylist::next);
+    connect(ui->btn_play, &QToolButton::clicked, m_player, &QMediaPlayer::play);
+    connect(ui->btn_pause, &QToolButton::clicked, m_player, &QMediaPlayer::pause);
+    connect(ui->btn_stop, &QToolButton::clicked, m_player, &QMediaPlayer::stop);
+    connect(ui->backButton, &QToolButton::clicked, m_player, &QMediaPlayer::stop);//щоб виключалась, коли ми закриваємо нотатку
 
-       connect(ui->btn_previous, &QToolButton::clicked, m_playlist, &QMediaPlaylist::previous);
-       connect(ui->btn_next, &QToolButton::clicked, m_playlist, &QMediaPlaylist::next);
+    connect(ui->playlistView, &QTableView::doubleClicked, [this](const QModelIndex &index){m_playlist->setCurrentIndex(index.row());});
+    connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int index){ ui->playingName->setText(m_playListModel->data(m_playListModel->index(index, 0)).toString());});
 
-       connect(ui->btn_play, &QToolButton::clicked, m_player, &QMediaPlayer::play);
-       connect(ui->btn_pause, &QToolButton::clicked, m_player, &QMediaPlayer::pause);
-       connect(ui->btn_stop, &QToolButton::clicked, m_player, &QMediaPlayer::stop);
-       connect(ui->backButton, &QToolButton::clicked, m_player, &QMediaPlayer::stop);//щоб виключалась, коли ми закриваємо нотатку
-
-       connect(ui->playlistView, &QTableView::doubleClicked, [this](const QModelIndex &index){m_playlist->setCurrentIndex(index.row());});
-       connect(m_playlist, &QMediaPlaylist::currentIndexChanged, [this](int index){ ui->playingName->setText(m_playListModel->data(m_playListModel->index(index, 0)).toString());});
-
-       connect(ui->lon, &QSlider::sliderMoved, m_player, &QMediaPlayer::setPosition);
-       connect(m_player, &QMediaPlayer::durationChanged,ui->lon,&QSlider::setMaximum);
-       connect(m_player, &QMediaPlayer::positionChanged,ui->lon,&QSlider::setValue);
+    connect(ui->lon, &QSlider::sliderMoved, m_player, &QMediaPlayer::setPosition);
+    connect(m_player, &QMediaPlayer::durationChanged,ui->lon,&QSlider::setMaximum);
+    connect(m_player, &QMediaPlayer::positionChanged,ui->lon,&QSlider::setValue);
 
 }
+
 
 Note::~Note()
 {
     delete ui;
     delete m_playListModel;
-        delete m_playlist;
-        delete m_player;
+    delete m_playlist;
+    delete m_player;
 }
 
 void Note::on_backButton_clicked()
@@ -98,11 +81,15 @@ void Note::on_title_textChanged() // збереження заголовку
 
     shc->setText(0, getTitle());
 }
+
 void Note::on_NoteText_textChanged()// збереження тексту
 {
    shc->setWhatsThis(0, ui->NoteText->toPlainText());
 }
 
+
+
+// CHOOSE GROUP BUTTONS
 void Note::on_tabButton_clicked()
 {
     ui->tabWidget->setEnabled(true);
@@ -111,7 +98,6 @@ void Note::on_tabButton_clicked()
 
 void Note::on_tabWidget_tabCloseRequested(int index) // Не використовуватимемо більше однієї вкладки, тому index не використано
 {
-   // ui->tabWidget->setEnabled(false);
     ui->tabWidget->hide();
 }
 
@@ -160,8 +146,6 @@ void Note::on_studyButton_toggled(bool checked)
     }
 }
 
-
-
 void Note::on_todoButton_toggled(bool checked)
 {
     if (checked)
@@ -175,18 +159,8 @@ void Note::on_todoButton_toggled(bool checked)
 }
 
 
-/*
-void Note::on_toolButton_2_clicked()
-{
-    QListWidgetItem* it = ui->playlistView->takeItem(currentRow());
-     delete it;
 
-    myListUpdate();
-}
-
-*/
-
-
+// AUDIO IMPORT BUTTONS
 void Note::on_pushButton_2_clicked()
 {
     QStringList files = QFileDialog::getOpenFileNames(this, tr("Open files"), QString(), tr("Audio Files (*.mp3)"));
@@ -198,6 +172,7 @@ void Note::on_pushButton_2_clicked()
            m_playListModel->appendRow(items);
            m_playlist->addMedia(QUrl(filePath));
        }
+
     ui->btn_stop->show();
     ui->deleteMusicButton->show();
     ui->btn_pause->show();
@@ -219,7 +194,12 @@ void Note::on_vol_sliderMoved(int position)
     m_player->setVolume(position);
 }
 
-//----------------------------------------------ЗОБРАЖЕННЯ------------------------------------------------------------------------------------------
+void Note::on_deleteMusicButton_clicked()
+{
+
+}
+
+// IMAGES IMPORT BUTTONS
 void Note::on_pushButton_clicked()
 {
     ui->imgImportTabWidget->setEnabled(true);
@@ -279,10 +259,6 @@ void Note::on_imgImport2_toggled(bool checked)
        }
     }
 }
-
-
-
-
 
 void Note::on_imgImport3_toggled(bool checked)
 {
@@ -451,81 +427,161 @@ void Note::on_imgImport8_toggled(bool checked)
     }
 }
 
-
 void Note::on_imgImportTabWidget_tabCloseRequested(int index)
 {
     ui->imgImportTabWidget->setEnabled(false);
     ui->imgImportTabWidget->hide();
 }
 
+// IMAGES DELETE BUTTONS
 void Note::on_deleteImgButton_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL1->clear();
     ui->imgImport1->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
 void Note::on_deleteImgButton_2_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL2->clear();
     ui->imgImport2->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
 void Note::on_deleteImgButton_3_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL3->clear();
     ui->imgImport3->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
 void Note::on_deleteImgButton_4_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL4->clear();
     ui->imgImport4->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
 void Note::on_deleteImgButton_5_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL5->clear();
     ui->imgImport5->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
 void Note::on_deleteImgButton_6_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL6->clear();
     ui->imgImport6->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
 void Note::on_deleteImgButton_7_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL7->clear();
     ui->imgImport7->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
 void Note::on_deleteImgButton_8_clicked()
 {
+    QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення зображення","Ви точно хочете видалити це зображення?",
+                           QMessageBox::Yes | QMessageBox::No);
+
+     if(reply ==  QMessageBox::Yes)
+     {
     ui->imgL8->clear();
     ui->imgImport8->setEnabled(true);
+     }
+     else
+     {
+     qDebug()<<"Wasn't deleted";
+     }
 }
 
 
+
+// BACKGROUND CHANGE BUTTONS
 void Note::on_pushButton_3_clicked()
 {
     ui->fon_widget->setEnabled(true);
     ui->fon_widget->show();
 }
 
-
 void Note::on_fon_widget_tabCloseRequested(int index)
 {
     ui->fon_widget->hide();
 }
-
 
 void Note::on_f1_toggled(bool checked)
 {
@@ -689,6 +745,8 @@ void Note::on_f7_toggled(bool checked)
 }
 
 
+
+// TEXT COLOR CHANGE BUTTONS
 void Note::on_bRed_clicked()
 {
     ui->NoteText->setTextColor(Qt::red);
@@ -752,6 +810,8 @@ void Note::on_bBrown_clicked()
 }
 
 
+
+// TEXT STYLE CHANGE BUTTONS
 void Note::on_Kp_clicked()
 {
     ui->NoteText->setFontItalic(true);
@@ -802,13 +862,12 @@ void Note::on_pushButton_4_clicked()
 }
 
 
+
+// TEXT SIZE CHANGE BUTTONS
 void Note::on_sizeWidget_tabCloseRequested(int index)
 {
     ui->sizeWidget->hide();
 }
-
-
-
 
 void Note::on_s10_clicked()
 {
@@ -881,7 +940,7 @@ void Note::on_s48_clicked()
        ui->NoteText->setFontPointSize(48);
 }
 
-
+// TEXT BACKGROUND COLOR CHANGE BUTTONS
 void Note::on_bviol_2_clicked()
 {
     ui->NoteText->setTextBackgroundColor(Qt::magenta);
@@ -945,7 +1004,15 @@ void Note::on_bWhite_2_clicked()
 }
 
 
+void Note::on_pushButton_5_clicked()
+{
+    ui->NoteText->redo();
+}
+
+
 void Note::on_pushButton_6_clicked()
 {
-
+    ui->NoteText->undo();
 }
+
+

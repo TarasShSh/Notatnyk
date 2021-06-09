@@ -4,30 +4,20 @@
 #include <QtCore>
 #include <QAction>
 #include "QKeyEvent"
+
 Widget::Widget(QWidget *parent): QWidget(parent), ui(new Ui::Widget)
 {
     ui->setupUi(this);
     setWindowTitle("Нотатник");
-   ui->colors->hide();
 
-    //QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
-    //proxyModel->setSourceModel(new QStringListModel(list));
-
-   // QStandardItemModel* mod = new QStandardItemModel(this);
-    //ui->notesList->setModel(mod);
+    ui->colors->hide();
 }
-
-/*
-void updateListFilter(const QString& filterString)
-{
-proxyModel->setFilterWildcard(QString("%1").arg(filterString);
-}
-*/
 
 Widget::~Widget()
 {
     delete ui;
 }
+
 void Widget::keyPressEvent(QKeyEvent *event)
 {
     if( event->key() ==Qt::Key_N )
@@ -35,6 +25,7 @@ void Widget::keyPressEvent(QKeyEvent *event)
         on_createNoteButton_clicked();
     }
 }
+
 void Widget::createShortcutNote(Note *n)
 {
     n->date = n->getDate();
@@ -50,13 +41,17 @@ void Widget::createShortcutNote(Note *n)
     ui->archiveButton->setEnabled(true);
     ui->archiveButton->setCursor(Qt::PointingHandCursor);
 }
+
+
+
+// NOTES MANIPULATIONS
 void Widget::on_createNoteButton_clicked()
 {
     Note *n = new Note();
     ++noteNumber;
     notes[noteNumber] = n;
     qDebug() << "Note has been created" << n <<"Time:"<< n->getDate();
-        n->show();
+    n->show();
 
     createShortcutNote(n); // функція створення ярлика нотатки
 
@@ -64,6 +59,7 @@ void Widget::on_createNoteButton_clicked()
     ui->deleteButton->setEnabled(true);
     ui->createSubNote->setEnabled(true);
 }
+
 void Widget::on_createSubNote_clicked()
 {
     Note *n = new Note();
@@ -84,6 +80,7 @@ void Widget::on_notesTree_itemDoubleClicked(QTreeWidgetItem *item, int column)
 {
     notes[item->data(0,1).toInt()]->show();
     item->setStatusTip(1, notes[0]->getDate());
+
     if(ui->recentNotes->topLevelItemCount() >= 3){
         delete ui->recentNotes->topLevelItem(3);
     }
@@ -93,10 +90,74 @@ void Widget::on_notesTree_itemDoubleClicked(QTreeWidgetItem *item, int column)
     ui->recentNotes->topLevelItem(0)->setData(0,1,item->data(0,1).toInt()); // та номер нотатки
 }
 
+void Widget::on_notesTree_itemClicked(QTreeWidgetItem *item, int column) // нічого не залежить від колонки по якій натиснуто
+{
+    ui->preview->setText(item->whatsThis(0));
+}
+
+void Widget::on_archiveNotesTree_itemClicked(QTreeWidgetItem *item, int column)
+{
+    ui->preview->setText(item->whatsThis(0));
+}
+
 void Widget::on_recentNotes_itemPressed(QTreeWidgetItem *item, int column)
 {
     notes[item->data(0,1).toInt()]->show();
 }
+
+void Widget::on_archiveButton_clicked()
+{
+    // Отримуємо номер виділеного рядка ui->notesTree->currentIndex().row()
+    // Вирізаємо takeTopLevelItem() та додаємо addTopLevelItem виділений рядок до архіву
+
+   ui->archiveNotesTree->addTopLevelItem( ui->notesTree->takeTopLevelItem(ui->notesTree->currentIndex().row()));
+   ui->unArchiveButton->setEnabled(true);
+}
+
+
+void Widget::on_deleteButton_clicked()
+{
+   QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення нотатки","Ви точно хочете видалити цю нотатку назавжди?",
+                          QMessageBox::Yes | QMessageBox::No);
+
+    if(reply ==  QMessageBox::Yes)
+    {
+        if(ui->tabWidget->currentWidget() == ui->notesTab)
+        {
+            // Видалення елементу зі списку
+            delete ui->notesTree->currentItem();
+
+        }
+        else if(ui->tabWidget->currentWidget() == ui->archiveTab)
+        {
+            // Видалення елементу з архівного списку
+            delete ui->archiveNotesTree->currentItem();
+        }
+    }
+    else
+    {
+    qDebug()<<"Wasn't deleted";
+    }
+}
+
+void Widget::on_unArchiveButton_clicked()
+{
+   // Отримуємо номер виділеного рядка ui->archiveNotesTree->currentIndex().row()
+   // Вирізаємо takeTopLevelItem() та повертаємо addTopLevelItem виділений рядок нотаток
+     ui->notesTree->addTopLevelItem( ui->archiveNotesTree->takeTopLevelItem( ui->archiveNotesTree->currentIndex().row() ) );
+
+  // ui->notesTree->insertTopLevelItem(0,ui->archiveNotesTree->currentItem());
+  // ui->notesTree->addTopLevelItem(ui->archiveNotesTree->currentItem());
+    qDebug() << "beep Disarchive";
+}
+
+void Widget::on_notesTree_clicked(const QModelIndex &index)
+{
+    qDebug()<<"notesTree_clicked index: "<<index;
+}
+
+
+// ADDITIONAL BUTTONS
 void Widget::on_aboutQTButton_clicked()
 {
     QMessageBox::aboutQt(this,"About Qt");
@@ -107,18 +168,14 @@ void Widget::on_exitButton_clicked()
   QApplication::quit();
 }
 
-void Widget::on_notesTree_itemClicked(QTreeWidgetItem *item, int column) // нічого не залежить від колонки по якій натиснуто
+void Widget::on_pushButton_clicked()
 {
-    ui->preview->setText(item->whatsThis(0));
-}
-void Widget::on_archiveNotesTree_itemClicked(QTreeWidgetItem *item, int column)
-{
-    ui->preview->setText(item->whatsThis(0));
+
 }
 
 
-//--------------------------------------------------------
 
+// FILTER
 void Widget::on_filteredButton_clicked()
 {
     if(       ui->noneCheckBox->isChecked()
@@ -168,56 +225,10 @@ void Widget::on_filteredButton_clicked()
    // ui->foundedNumber->setText(QString("%1").arg(count));
 }
 }
-//--------------------------------------------------------
 
 
-void Widget::on_archiveButton_clicked()
-{
-    // Отримуємо номер виділеного рядка ui->notesTree->currentIndex().row()
-    // Вирізаємо takeTopLevelItem() та додаємо addTopLevelItem виділений рядок до архіву
 
-       ui->archiveNotesTree->addTopLevelItem( ui->notesTree->takeTopLevelItem(ui->notesTree->currentIndex().row()));
-
-   ui->unArchiveButton->setEnabled(true);
-}
-
-void Widget::on_deleteButton_clicked()
-{
-   QMessageBox::StandardButton reply = QMessageBox::question(this,"Видалення нотатки","Ви точно хочете видалити цю нотатку назавжди?",
-                          QMessageBox::Yes | QMessageBox::No);
-
-    if(reply ==  QMessageBox::Yes)
-    {
-        if(ui->tabWidget->currentWidget() == ui->notesTab)
-        {
-            // Видалення елементу зі списку
-
-            delete ui->notesTree->currentItem();
-
-        }
-        else if(ui->tabWidget->currentWidget() == ui->archiveTab)
-        {
-            // Видалення елементу з архівного списку
-            delete ui->archiveNotesTree->currentItem();
-        }
-    }
-    else
-    {
-    qDebug()<<"Wasn't deleted";
-    }
-}
-
-void Widget::on_unArchiveButton_clicked()
-{
-   // Отримуємо номер виділеного рядка ui->archiveNotesTree->currentIndex().row()
-   // Вирізаємо takeTopLevelItem() та повертаємо addTopLevelItem виділений рядок нотаток
-     ui->notesTree->addTopLevelItem( ui->archiveNotesTree->takeTopLevelItem( ui->archiveNotesTree->currentIndex().row() ) );
-
-  // ui->notesTree->insertTopLevelItem(0,ui->archiveNotesTree->currentItem());
-  // ui->notesTree->addTopLevelItem(ui->archiveNotesTree->currentItem());
-    qDebug() << "beep Disarchive";
-}
-
+// SEARCH BY CHILDS NAMES (AND RETURN AMOUNT OF FINDED ELEMENTS)
 void Widget::on_searchLine_textChanged(const QString &arg1)
 {
     ui->foundedNumber->setText(QString("%1").arg(search(0, arg1)));
@@ -249,6 +260,9 @@ int Widget::search(int column, QString regExp)
     }
     return times;
 }
+
+
+
 void Widget::filterNShow(int column, QString regExp)
 {
     for (int father = 0; father < (ui->notesTree->topLevelItemCount()); ++father)
@@ -270,19 +284,10 @@ void Widget::filterNShow(int column, QString regExp)
 }
 }
 
-void Widget::on_notesTree_clicked(const QModelIndex &index)
-{
-    qDebug()<<"notesTree_clicked index: "<<index;
-}
 
 
 
-void Widget::on_pushButton_clicked()
-{
-
-}
-
-
+// CURRENT ROW COLOR CHANGE BUTTONS
 void Widget::on_pushButton_2_clicked()
 {
     ui->colors->setEnabled(true);
@@ -359,3 +364,4 @@ void Widget::on_colors_tabCloseRequested(int index)
     ui->colors->setEnabled(false);
     ui->colors->hide();
 }
+

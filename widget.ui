@@ -116,11 +116,13 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;Вітаємо в Нотатнику!&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Ми вдячні, що ви вирішили закарбувати свої думки саме в нашій програмі.&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Натисніть на клавішу &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;N&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; або кнопку&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;, щоб додати нотатку.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Оберіть ярлик нотатки й натисніть &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Архівувати&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; або &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Видалити&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;, щоб сховати нотатку до архіву або видалити її.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Для того щоб повернути архівовану нотатку — перейдіть до вкладки &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Архів&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;, оберіть нотатку яку хочете повернути та натисність &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Повернути&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Сортуйте та фільтруйте нотатки за алфавітом, датою та групами натиснувши на заголовок, дату або групу.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Шукайте нотатку за її заголовком, уводячи ключові слова в поле &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Пошук&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;у.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; Натисніть &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;cntrl+N&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; або кнопку&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;+&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;, щоб додати нотатку.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; Оберіть ярлик нотатки й натисніть &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Архівувати&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; або &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Видалити&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;, щоб сховати нотатку до архіву або видалити її.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Для того щоб повернути архівовану нотатку — перейдіть до вкладки &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Архів&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;, оберіть нотатку яку хочете повернути та натисність &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Повернути&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;• &lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Для того, щоб переглянути текст нотатки, клацніть по рядочку з нею 1 раз&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;• &lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Для того, щоб відкрити нотатку повністю, клацніть по рядочку з нею 2 рази&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;• &lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Сортуйте та фільтруйте нотатки за алфавітом, датою та групами натиснувши на заголовок, дату або групу.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt; Складно знайти вкладену нотатку? Шукайте її за заголовком, уводячи ключові слова в поле &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Пошук&lt;/span&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;у. Сірі трикутники зліва від назв головних нотаток залишаться тільки біля тих, які містять в собі похідну нотатку із вказаним ключовим словом.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -213,7 +215,19 @@ p, li { white-space: pre-wrap; }
    </item>
    <item>
     <widget class="QGroupBox" name="search">
-     <layout class="QHBoxLayout" name="searchLayer">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Розфарбувати рядок🎨</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QLabel" name="searchText">
         <property name="enabled">
@@ -227,13 +241,13 @@ p, li { white-space: pre-wrap; }
         </property>
         <property name="font">
          <font>
-          <pointsize>14</pointsize>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
         <property name="text">
-         <string>Пошук</string>
+         <string>     Пошук вкладених нотаток</string>
         </property>
        </widget>
       </item>
@@ -276,18 +290,6 @@ p, li { white-space: pre-wrap; }
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Розфарбувати рядок🎨</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -308,7 +310,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>-1</x>
          <y>-1</y>
-         <width>571</width>
+         <width>581</width>
          <height>141</height>
         </rect>
        </property>
@@ -382,6 +384,15 @@ p, li { white-space: pre-wrap; }
         <property name="text">
          <string>Дата створення</string>
         </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="whatsThis">
+         <string/>
+        </property>
        </column>
        <column>
         <property name="text">
@@ -395,10 +406,10 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="geometry">
         <rect>
-         <x>400</x>
+         <x>410</x>
          <y>0</y>
-         <width>171</width>
-         <height>111</height>
+         <width>161</width>
+         <height>101</height>
         </rect>
        </property>
        <property name="autoFillBackground">
@@ -422,14 +433,17 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>120</x>
            <y>40</y>
-           <width>41</width>
-           <height>41</height>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <pointsize>36</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(255, 255, 255));</string>
          </property>
          <property name="text">
           <string>⬜</string>
@@ -440,14 +454,17 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>80</x>
            <y>0</y>
-           <width>41</width>
-           <height>41</height>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <pointsize>36</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(85, 255, 0));</string>
          </property>
          <property name="text">
           <string>🟩</string>
@@ -458,14 +475,17 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>80</x>
            <y>40</y>
-           <width>41</width>
-           <height>41</height>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <pointsize>36</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(255, 0, 0));</string>
          </property>
          <property name="text">
           <string>🟥</string>
@@ -476,14 +496,17 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>0</x>
            <y>40</y>
-           <width>41</width>
-           <height>41</height>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <pointsize>36</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(255, 255, 0));</string>
          </property>
          <property name="text">
           <string>🟨</string>
@@ -494,8 +517,8 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>41</width>
-           <height>41</height>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
@@ -504,7 +527,7 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgba(174, 0, 140, 255));</string>
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(243, 0, 243));</string>
          </property>
         </widget>
         <widget class="QPushButton" name="cBlue">
@@ -512,14 +535,17 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>40</x>
            <y>40</y>
-           <width>41</width>
-           <height>41</height>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
           <font>
            <pointsize>36</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(0, 0, 255));</string>
          </property>
          <property name="text">
           <string>🟦</string>
@@ -530,8 +556,32 @@ p, li { white-space: pre-wrap; }
           <rect>
            <x>40</x>
            <y>0</y>
-           <width>41</width>
-           <height>41</height>
+           <width>31</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>36</pointsize>
+          </font>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(170, 0, 0));</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="cGray">
+         <property name="geometry">
+          <rect>
+           <x>120</x>
+           <y>0</y>
+           <width>31</width>
+           <height>31</height>
           </rect>
          </property>
          <property name="font">
@@ -540,22 +590,7 @@ p, li { white-space: pre-wrap; }
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgba(170, 0, 255, 255));</string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="cGray">
-         <property name="geometry">
-          <rect>
-           <x>120</x>
-           <y>0</y>
-           <width>41</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>36</pointsize>
-          </font>
+          <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:1 rgb(165, 165, 165));</string>
          </property>
          <property name="text">
           <string/>
@@ -742,29 +777,6 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="openButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Відкрити</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QGroupBox" name="actionsOnScLayer">
        <property name="enabled">
         <bool>false</bool>
@@ -836,22 +848,6 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="text">
         <string>Про QT</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Імпортувати фон</string>
        </property>
       </widget>
      </item>
